@@ -30,6 +30,16 @@ window.addEventListener("load", event => {
 
 
 function addCobrowseScript() {
+  var websocket = "www.glance.net"
+  var domain = "www"
+
+  if (document.querySelector("#use-beta").checked) {
+    websocket = "beta.glance.net"
+    domain = "beta"
+    document.querySelector("header").style.background = "#BF40BF"
+    document.querySelector("#using-beta").innerText = "Yes"
+  }
+
   var theCobrowseScript = document.createElement("script");
   var visitorId = document.getElementById("visitorId").value;
   var groupId = document.getElementById("groupId").value;
@@ -41,9 +51,10 @@ function addCobrowseScript() {
   theCobrowseScript.setAttribute("charset", "UTF-8");
   theCobrowseScript.setAttribute("data-visitorid", visitorId);
   theCobrowseScript.setAttribute("data-presence", "on");
+  theCobrowseScript.setAttribute("data-ws", websocket);
   theCobrowseScript.setAttribute(
     "src",
-    `https://www.glancecdn.net/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`
+    `https://${domain}.glancecdn.net/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`
   );
   document.head.append(theCobrowseScript);
 }
@@ -74,6 +85,7 @@ function submitClicked() {
   url.searchParams.set('groupid', document.getElementById("groupId").value);
   url.searchParams.set('environment', document.getElementById("environment").value);
   url.searchParams.set('visitorId', document.getElementById("visitorId").value);
+  url.searchParams.set('beta', document.querySelector("#use-beta").checked);
   window.history.pushState({}, '', url)
   addCobrowseScript();
   hideUserInput();
@@ -91,6 +103,7 @@ window.onload = event => {
     const groupid = urlParams.get('groupid');
     const environment = urlParams.get('environment');
     const visitorId = urlParams.get('visitorId');
+    const beta = urlParams.get('beta');
     if (groupid){
       document.getElementById("groupId").value = groupid
     }
@@ -99,5 +112,8 @@ window.onload = event => {
     }
     if (visitorId) {
       document.getElementById("visitorId").value = visitorId
+    }
+    if (beta == "true") {
+      document.querySelector("#use-beta").checked = true
     }
 };
