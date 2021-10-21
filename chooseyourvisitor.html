@@ -118,6 +118,10 @@
                   <input type="checkbox" id="use-beta" name="use-beta" value="Beta">
                   <label for="use-beta">Use beta.glance.net?</label>
                   <br /><br />
+                  <label for="allowed-roles">Specify allowed roles (optional, comma delimited):</label>
+                  <br /><br />
+                  <input type="text" id="allowed-roles" name="allowed-roles">
+                  <br /><br />
                   <input type="button" value="Submit" id="visitor-id-button" />
                </form>
             </div>
@@ -125,7 +129,9 @@
                <p id="status-message">Waiting for agent</p>
                <p>Visitor ID: <span id="visitor-id"></span></p>
                <p>Group ID: <span id="group-id"></span></p>
+               <p>Environment: <span id="environment-chosen"></span></p>
                <p>Using Beta: <span id="using-beta">No</span></p>
+               <p>Allowed Roles: <span id="allowed-roles-list"></span></p>
                <div class="loader" id="loader"></div>
             </div>
          </div>
