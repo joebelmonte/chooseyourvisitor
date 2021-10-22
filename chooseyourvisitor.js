@@ -79,7 +79,7 @@ GLANCE_COBROWSE.getMaskingDescriptor = async function (params) {
 
         // If agent information is not yet available, mask everything with a data-agentrole attribute
         if (!params.agents || params.agents.count === 0)
-          maskingdescriptor.maskpage = false
+          maskingdescriptor.maskpage = true
         else (
           maskingdescriptor.maskpage = shouldPageBeMasked(params)
         )
