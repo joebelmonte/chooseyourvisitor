@@ -19,11 +19,16 @@ GLANCE_COBROWSE.getMaskingDescriptor = async function (params) {
         let maskingdescriptor = {};
 
         // If agent information is not yet available, mask everything with a data-agentrole attribute
-        if (!params.agents || params.agents.count === 0)
-          maskingdescriptor.maskpage = true
-        else (
-          maskingdescriptor.maskpage = shouldPageBeMasked(params)
-        )
+        try {
+          if (!params.agents || params.agents.count === 0)
+            maskingdescriptor.maskpage = true
+          else (
+            maskingdescriptor.maskpage = shouldPageBeMasked(params)
+          )
+        } catch(e) {
+          console.log("Masking descriptor error: ", e)
+          console.log(`You are on version ${GLANCE.VERSION} of Glance.  5.2+ required.`)
+        }
         console.log('maskingdescriptor is ', maskingdescriptor)
         resolve(maskingdescriptor);
     })
