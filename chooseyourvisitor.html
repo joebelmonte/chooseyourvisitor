@@ -276,6 +276,12 @@
              document.getElementById("submit-masked").addEventListener("click",buttonClicked)
              document.getElementById("submit-not-masked").addEventListener("click",buttonClicked2)
          </script>
+         <script>
+         // Change backgroundcolor if on dev
+         if (window.location.href.includes("dev")) {
+           document.body.style.backgroundColor = "#7bed9f"
+         }
+         </script>
       </footer>
    </body>
 </html>
