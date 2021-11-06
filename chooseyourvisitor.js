@@ -50,13 +50,6 @@ function sessionStarted() {
   document.getElementById("status-message").innerHTML = "";
 }
 
-function getAllowedRoles() {
-  var allowedRoles = document.querySelector("#allowed-roles").value
-  var allowedRolesArray = allowedRoles.split(',')
-  var allowedRolesArrayTrimmed = allowedRolesArray.map(role => role.trim())
-  return allowedRolesArrayTrimmed
-}
-
 function submitClicked() {
   console.log("submit button clicked at ", Date());
   const url = new URL(window.location);
