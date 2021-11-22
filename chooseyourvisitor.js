@@ -26,6 +26,10 @@ function addCobrowseScript() {
     `https://${domain}.glancecdn.net/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`
   );
   document.head.append(theCobrowseScript);
+
+  theCobrowseScript.addEventListener("load",(e) => {
+    document.getElementById("cb-version").innerHTML = `Cobrowse script version: ${GLANCE.VERSION}`
+  })
 }
 
 function hideUserInput() {

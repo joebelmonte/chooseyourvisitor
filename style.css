@@ -141,3 +141,12 @@ body > section {
 input#allowed-roles {
     width: 400px;
 }
+
+#cb-version {
+    padding-left: 13px;
+    font-size: 14px;
+}
+
+#subtitle {
+    margin: 5px 0px 5px 5px;
+}
