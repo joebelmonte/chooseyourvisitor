@@ -1,294 +1,336 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-   <head>
-      <meta charset="utf-8" />
-      <meta http-equiv="x-ua-compatible" content="ie=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="canonical" href="https://html5-templates.com/" />
-      <title>Choose Your Visitor Test Page</title>
-      <meta
-         name="description"
-         content="Simple HTML5 Page layout template with header, footer, sidebar etc."
-         />
-      <link rel="stylesheet" href="style.css" />
-      <script>
-        var GLANCE_COBROWSE = {}
-      </script>
-      <script>
-         var map = {};
-         onkeydown = onkeyup = function(e) {
-           e = e || event; // to deal with IE
-           map[e.keyCode] = e.type == "keydown";
-           if (map[16] && (map[8] || map[46])) {
-             // shift is 16, backspace is 8, delete is 46
-             GLANCE.Cobrowse.Visitor.showTerms({
-               sessionKey: "GLANCE_KEYTYPE_RANDOM"
-             });
-           }
-         };
-      </script>
-      <script src="chooseyourvisitor.js"></script>
-      <script src="crossdomain.js"></script>
-      <script src="pdf.js"></script>
-      <script src="masking-logic.js"></script>
-      <style>
-         .loader {
-         border: 16px solid #f3f3f3;
-         border-radius: 50%;
-         border-top: 16px solid #3498db;
-         width: 120px;
-         height: 120px;
-         -webkit-animation: spin 2s linear infinite; /* Safari */
-         animation: spin 2s linear infinite;
-         }
-         /* Safari */
-         @-webkit-keyframes spin {
-         0% {
-         -webkit-transform: rotate(0deg);
-         }
-         100% {
-         -webkit-transform: rotate(360deg);
-         }
-         }
-         @keyframes spin {
-         0% {
-         transform: rotate(0deg);
-         }
-         100% {
-         transform: rotate(360deg);
-         }
-         }
-         #user-feedback {
-         display: none;
-         }
-      </style>
-   </head>
-   <body>
-      <header>
-         <div id="logo">Cobrowse Test Page</div>
-         <div id="subtitle">
-           <a href="https://github.com/joebelmonte/chooseyourvisitor" target="_blank">About</a>
-           <span id="cb-version"></span>
-         </div>
-         <nav>
-            <ul>
-               <li
-                  onclick='GLANCE.Cobrowse.Visitor.startSession("GLANCE_KEYTYPE_RANDOM")'
-                  >
-                  <a href="#">Cobrowse</a>
-               </li>
-               <li glance_button="toggleButton">
-                 <a href="#">Show Glance Button</a>
-               </li>
-               <li glance_button="showTerms">
-                 <a href="#">Show Glance Terms and Conditions</a>
-               </li>
-               <li>
-                 <a href="https://glancepro.online/">Glancepro.online Anchor</a>
-               </li>
-               <li id="redirectCrossDomain">
-                 <a href="#">Glancepro.online JS CrossDomain</a>
-               </li>
-               <li id="redirectPromptCrossDomain">
-                 <a href="#">Glancepro.online JS promptCrossDomain</a>
-               </li>
-               <li>
-                  <a
-                     href="https://glancepro.online/"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     >Glancepro.online Anchor in New Tab</a
-                     >
-               </li>
-            </ul>
-         </nav>
-      </header>
-      <section>
-         <strong
-            >Demonstration of a simple page layout using HTML5 tags: header, nav,
-         section, main, article, aside, footer, address.</strong
-            ><br /><br />
-         <div class="user-input-feedback">
-            <div id="user-input">
-               <form>
-                  <p>Visitor ID:</p>
-                  <input
-                     type="text"
-                     id="visitorId"
-                     name="visitorId"
-                     value="example"
-                     /><br /><br />
-                  <p>Group ID:</p>
-                  <input
-                     type="text"
-                     id="groupId"
-                     name="groupId"
-                     value="20541"
-                     /><br /><br>
-                  <select id="environment">
-                     <option value="staging">staging</option>
-                     <option value="production">production</option>
-                  </select
-                     >
-                  <br /><br />
-                  <input type="checkbox" id="use-beta" name="use-beta" value="Beta">
-                  <label for="use-beta">Use beta.glance.net?</label>
-                  <br /><br />
-                  <label for="allowed-roles">Specify allowed roles (optional, comma delimited):</label>
-                  <br /><br />
-                  <input type="text" id="allowed-roles" name="allowed-roles">
-                  <br /><br />
-                  <input type="button" value="Submit" id="visitor-id-button" />
-               </form>
-            </div>
-            <div id="user-feedback">
-               <p id="status-message">Waiting for agent</p>
-               <p>Visitor ID: <span id="visitor-id"></span></p>
-               <p>Group ID: <span id="group-id"></span></p>
-               <p>Environment: <span id="environment-chosen"></span></p>
-               <p>Using Beta: <span id="using-beta">No</span></p>
-               <p>Allowed Roles: <span id="allowed-roles-list"></span></p>
-               <div class="loader" id="loader"></div>
-            </div>
-         </div>
-      </section>
-      <section id="pageContent">
-         <main role="main">
-            <article>
-               <h2>Stet facilis ius te</h2>
-               <p>
-                  Lorem ipsum dolor sit amet, nonumes voluptatum mel ea, cu case
-                  ceteros cum. Novum commodo malorum vix ut. Dolores consequuntur in
-                  ius, sale electram dissentiunt quo te. Cu duo omnes invidunt, eos eu
-                  mucius fabellas. Stet facilis ius te, quando voluptatibus eos in. Ad
-                  vix mundi alterum, integre urbanitas intellegam vix in.
-               </p>
-            </article>
-            <article>
-               <h2>Illud mollis moderatius</h2>
-               <p>
-                  Eum facete intellegat ei, ut mazim melius usu. Has elit simul primis
-                  ne, regione minimum id cum. Sea deleniti dissentiet ea. Illud mollis
-                  moderatius ut per, at qui ubique populo. Eum ad cibo legimus, vim ei
-                  quidam fastidii.
-               </p>
-            </article>
-            <article>
-               <h2>Ex ignota epicurei quo</h2>
-               <p>
-                  Quo debet vivendo ex. Qui ut admodum senserit partiendo. Id
-                  adipiscing disputando eam, sea id magna pertinax concludaturque. Ex
-                  ignota epicurei quo, his ex doctus delenit fabellas, erat timeam
-                  cotidieque sit in. Vel eu soleat voluptatibus, cum cu exerci
-                  mediocritatem. Malis legere at per, has brute putant animal et, in
-                  consul utamur usu.
-               </p>
-            </article>
-            <article>
-               <h2>His at autem inani volutpat</h2>
-               <p>
-                  Te has amet modo perfecto, te eum mucius conclusionemque, mel te
-                  erat deterruisset. Duo ceteros phaedrum id, ornatus postulant in
-                  sea. His at autem inani volutpat. Tollit possit in pri, platonem
-                  persecuti ad vix, vel nisl albucius gloriatur no.
-               </p>
-            </article>
-            <h2>HTML Forms</h2>
-
-                <form>
-                  <label for="fname">First name:</label><br>
-                  <input type="text" id="fname" name="fname" value="John"><br><br>
-                  <label for="lname">Last name:</label><br>
-                  <input type="text" id="lname" name="lname" value="Doe"><br><br>
-                  <label for="ssn">Social Security Number:</label><br>
-                  <span class=glance_masked></span>
-                  <input type="text" id="ssn" name="ssn" value="123-45-1234" glance_masked="true"><br><br>
-                  <div><button id="submit-masked" class="glance_masked example-button">Masked Submit</button></div><br>
-                  <div><button id="submit-not-masked" class="example-button">Submit</button></div>
-                </form><br>
-         </main>
-         <aside>
-           <div>
-             <a id="pdf" href="/resources/Glance_User_Provisioning_API.pdf"
-               >PDF Anchor Tag</a
-             ><br>
-             <a id="pdf" href="/resources/OoPdfFormExample.pdf"
-               >PDF with Form Fields Anchor Tag</a
-             >
-           </div>
-           <div><a id="pdf-js" href="#">PDF JavaScript</a></div>
-           <div><a href="javascript:;" id="excel-viewer">Sample Excel File</a></div>
-         </aside>
-      </section>
-      <a href="https://glancepro.online/resources/test.xlsx">Excel File on Differen Domain</a>
-      <a href="https://joebelmonte.site/resources/test.xlsx">Excel File on Same Domain</a>
-      <footer>
-         <p>
-            &copy; You can copy, edit and publish this template but please leave a
-            link to our website |
-            <a href="https://html5-templates.com/" target="_blank" rel="nofollow"
-               >HTML5 Templates</a
-               >
-         </p>
-         <address>Contact: <a href="mailto:me@example.com">Mail me</a></address>
-         <li class="seo-footer--reserved-link-items seo-footer--last-item">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://html5-templates.com/" />
+    <title>Choose Your Visitor Test Page</title>
+    <meta
+      name="description"
+      content="Simple HTML5 Page layout template with header, footer, sidebar etc."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      var GLANCE_COBROWSE = {};
+    </script>
+    <script>
+      var map = {};
+      onkeydown = onkeyup = function (e) {
+        e = e || event; // to deal with IE
+        map[e.keyCode] = e.type == "keydown";
+        if (map[16] && (map[8] || map[46])) {
+          // shift is 16, backspace is 8, delete is 46
+          GLANCE.Cobrowse.Visitor.showTerms({
+            sessionKey: "GLANCE_KEYTYPE_RANDOM",
+          });
+        }
+      };
+    </script>
+    <script src="chooseyourvisitor.js"></script>
+    <script src="crossdomain.js"></script>
+    <script src="pdf.js"></script>
+    <script src="masking-logic.js"></script>
+    <style>
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+      }
+      /* Safari */
+      @-webkit-keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      #user-feedback {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div id="logo">Cobrowse Test Page</div>
+      <div id="subtitle">
+        <a
+          href="https://github.com/joebelmonte/chooseyourvisitor"
+          target="_blank"
+          >About</a
+        >
+        <span id="cb-version"></span>
+      </div>
+      <nav>
+        <ul>
+          <li
+            onclick='GLANCE.Cobrowse.Visitor.startSession("GLANCE_KEYTYPE_RANDOM")'
+          >
+            <a href="#">Cobrowse</a>
+          </li>
+          <li glance_button="toggleButton">
+            <a href="#">Show Glance Button</a>
+          </li>
+          <li glance_button="showTerms">
+            <a href="#">Show Glance Terms and Conditions</a>
+          </li>
+          <li>
+            <a href="https://glancepro.online/">Glancepro.online Anchor</a>
+          </li>
+          <li id="redirectCrossDomain">
+            <a href="#">Glancepro.online JS CrossDomain</a>
+          </li>
+          <li id="redirectPromptCrossDomain">
+            <a href="#">Glancepro.online JS promptCrossDomain</a>
+          </li>
+          <li>
             <a
-               href="#"
-               onclick="javascript:return false;"
-               id="share-user-screen"
-               name="share-user-screen"
-               >Show Terms (Always Use Random Session Key)</a
-               >
-         </li>
-         <script type="text/javascript">
-            window.addEventListener("load", () => {
-              console.log("this page loaded!");
-              document
-                .getElementById("share-user-screen")
-                .addEventListener("click", () => {
-                  GLANCE.Cobrowse.Visitor.showTerms({
-                    sessionKey: "GLANCE_KEYTYPE_RANDOM"
-                  });
-                });
+              href="https://glancepro.online/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Glancepro.online Anchor in New Tab</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <strong
+        >Demonstration of a simple page layout using HTML5 tags: header, nav,
+        section, main, article, aside, footer, address.</strong
+      ><br /><br />
+      <div class="user-input-feedback">
+        <div id="user-input">
+          <form>
+            <div class="user-input-field">
+              <p>Visitor ID:</p>
+              <input
+                type="text"
+                id="visitorId"
+                name="visitorId"
+                value="example"
+              />
+            </div>
+            <div class="user-input-field">
+              <p>Group ID:</p>
+              <input type="text" id="groupId" name="groupId" value="20541" />
+            </div>
+            <div class="user-input-field">
+              Settings:
+              <select id="environment">
+                <option value="staging">staging</option>
+                <option value="production">production</option>
+              </select>
+            </div>
+            <div class="user-input-field">
+              <input
+                type="checkbox"
+                id="use-beta"
+                name="use-beta"
+                value="Beta"
+              />
+              <label for="use-beta">Use beta.glance.net?</label>
+            </div>
+            <div class="user-input-field">
+              <label for="allowed-roles"
+                >Specify allowed roles (optional, comma delimited):</label
+              >
+              <input type="text" id="allowed-roles" name="allowed-roles" />
+            </div>
+            <input type="button" value="Submit" id="visitor-id-button" />
+          </form>
+        </div>
+        <div id="user-feedback">
+          <p id="status-message">Waiting for agent</p>
+          <p>Visitor ID: <span id="visitor-id"></span></p>
+          <p>Group ID: <span id="group-id"></span></p>
+          <p>Environment: <span id="environment-chosen"></span></p>
+          <p>Using Beta: <span id="using-beta">No</span></p>
+          <p>Allowed Roles: <span id="allowed-roles-list"></span></p>
+          <div class="loader" id="loader"></div>
+        </div>
+      </div>
+    </section>
+    <section id="pageContent">
+      <main role="main">
+        <article>
+          <h2>Stet facilis ius te</h2>
+          <p>
+            Lorem ipsum dolor sit amet, nonumes voluptatum mel ea, cu case
+            ceteros cum. Novum commodo malorum vix ut. Dolores consequuntur in
+            ius, sale electram dissentiunt quo te. Cu duo omnes invidunt, eos eu
+            mucius fabellas. Stet facilis ius te, quando voluptatibus eos in. Ad
+            vix mundi alterum, integre urbanitas intellegam vix in.
+          </p>
+        </article>
+        <article>
+          <h2>Illud mollis moderatius</h2>
+          <p>
+            Eum facete intellegat ei, ut mazim melius usu. Has elit simul primis
+            ne, regione minimum id cum. Sea deleniti dissentiet ea. Illud mollis
+            moderatius ut per, at qui ubique populo. Eum ad cibo legimus, vim ei
+            quidam fastidii.
+          </p>
+        </article>
+        <article>
+          <h2>Ex ignota epicurei quo</h2>
+          <p>
+            Quo debet vivendo ex. Qui ut admodum senserit partiendo. Id
+            adipiscing disputando eam, sea id magna pertinax concludaturque. Ex
+            ignota epicurei quo, his ex doctus delenit fabellas, erat timeam
+            cotidieque sit in. Vel eu soleat voluptatibus, cum cu exerci
+            mediocritatem. Malis legere at per, has brute putant animal et, in
+            consul utamur usu.
+          </p>
+        </article>
+        <article>
+          <h2>His at autem inani volutpat</h2>
+          <p>
+            Te has amet modo perfecto, te eum mucius conclusionemque, mel te
+            erat deterruisset. Duo ceteros phaedrum id, ornatus postulant in
+            sea. His at autem inani volutpat. Tollit possit in pri, platonem
+            persecuti ad vix, vel nisl albucius gloriatur no.
+          </p>
+        </article>
+        <h2>HTML Forms</h2>
+
+        <form>
+          <label for="fname">First name:</label><br />
+          <input type="text" id="fname" name="fname" value="John" /><br /><br />
+          <label for="lname">Last name:</label><br />
+          <input type="text" id="lname" name="lname" value="Doe" /><br /><br />
+          <label for="ssn">Social Security Number:</label><br />
+          <span class="glance_masked"></span>
+          <input
+            type="text"
+            id="ssn"
+            name="ssn"
+            value="123-45-1234"
+            glance_masked="true"
+          /><br /><br />
+          <div>
+            <button id="submit-masked" class="glance_masked example-button">
+              Masked Submit
+            </button>
+          </div>
+          <br />
+          <div>
+            <button id="submit-not-masked" class="example-button">
+              Submit
+            </button>
+          </div>
+        </form>
+        <br />
+      </main>
+      <aside>
+        <div>
+          <a id="pdf" href="/resources/Glance_User_Provisioning_API.pdf"
+            >PDF Anchor Tag</a
+          ><br />
+          <a id="pdf" href="/resources/OoPdfFormExample.pdf"
+            >PDF with Form Fields Anchor Tag</a
+          >
+        </div>
+        <div><a id="pdf-js" href="#">PDF JavaScript</a></div>
+        <div>
+          <a href="javascript:;" id="excel-viewer">Sample Excel File</a>
+        </div>
+      </aside>
+    </section>
+    <a href="https://glancepro.online/resources/test.xlsx"
+      >Excel File on Differen Domain</a
+    >
+    <a href="https://joebelmonte.site/resources/test.xlsx"
+      >Excel File on Same Domain</a
+    >
+    <footer>
+      <p>
+        &copy; You can copy, edit and publish this template but please leave a
+        link to our website |
+        <a href="https://html5-templates.com/" target="_blank" rel="nofollow"
+          >HTML5 Templates</a
+        >
+      </p>
+      <address>Contact: <a href="mailto:me@example.com">Mail me</a></address>
+      <li class="seo-footer--reserved-link-items seo-footer--last-item">
+        <a
+          href="#"
+          onclick="javascript:return false;"
+          id="share-user-screen"
+          name="share-user-screen"
+          >Show Terms (Always Use Random Session Key)</a
+        >
+      </li>
+      <script type="text/javascript">
+        window.addEventListener("load", () => {
+          console.log("this page loaded!");
+          document
+            .getElementById("share-user-screen")
+            .addEventListener("click", () => {
+              GLANCE.Cobrowse.Visitor.showTerms({
+                sessionKey: "GLANCE_KEYTYPE_RANDOM",
+              });
             });
-         </script>
-         <a href="#" id="start-cobrowse-random-key" onclick="javascript:return false;">Test Cobrowse Session</a>
-         <script>
-            window.onload(
-              document
-                .getElementById("start-cobrowse-random-key")
-                .addEventListener("click", function(evt) {
-                  GLANCE.Cobrowse.Visitor.startSession({
-                    sessionKey: "GLANCE_KEYTYPE_RANDOM"
-                  });
-                  evt.stopPropagation();
-                })
-            );
+        });
+      </script>
+      <a
+        href="#"
+        id="start-cobrowse-random-key"
+        onclick="javascript:return false;"
+        >Test Cobrowse Session</a
+      >
+      <script>
+        window.onload(
+          document
+            .getElementById("start-cobrowse-random-key")
+            .addEventListener("click", function (evt) {
+              GLANCE.Cobrowse.Visitor.startSession({
+                sessionKey: "GLANCE_KEYTYPE_RANDOM",
+              });
+              evt.stopPropagation();
+            })
+        );
+      </script>
+      <script src="excel.js"></script>
+      <script>
+        var buttonClicked = function (e) {
+          e.preventDefault();
+          document.getElementById("submit-masked").classList.toggle("green");
+        };
 
-         </script>
-         <script src="excel.js"></script>
-         <script>
+        var buttonClicked2 = function (e) {
+          e.preventDefault();
+          document
+            .getElementById("submit-not-masked")
+            .classList.toggle("green");
+        };
 
-             var buttonClicked = function(e){
-                 e.preventDefault()
-                 document.getElementById("submit-masked").classList.toggle("green")
-             }
-
-             var buttonClicked2 = function(e){
-                 e.preventDefault()
-                 document.getElementById("submit-not-masked").classList.toggle("green")
-             }
-
-
-             document.getElementById("submit-masked").addEventListener("click",buttonClicked)
-             document.getElementById("submit-not-masked").addEventListener("click",buttonClicked2)
-         </script>
-         <script>
-         // Change backgroundcolor if on dev
-         if (window.location.href.includes("dev")) {
-           document.body.style.backgroundColor = "#7bed9f"
-         }
-         </script>
-      </footer>
-   </body>
+        document
+          .getElementById("submit-masked")
+          .addEventListener("click", buttonClicked);
+        document
+          .getElementById("submit-not-masked")
+          .addEventListener("click", buttonClicked2);
+      </script>
+      <script>
+        // Change backgroundcolor if on dev
+        if (window.location.href.includes("dev")) {
+          document.body.style.backgroundColor = "#7bed9f";
+        }
+      </script>
+    </footer>
+  </body>
 </html>
