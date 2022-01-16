@@ -145,6 +145,15 @@
               <label for="use-beta">Use beta.glance.net?</label>
             </div>
             <div class="user-input-field">
+              <input
+                type="checkbox"
+                id="auto-load"
+                name="auto-load"
+                value="auto-load"
+              />
+              <label for="auto-load">Auto load script?</label>
+            </div>
+            <div class="user-input-field">
               <label for="allowed-roles"
                 >Specify allowed roles (optional, comma delimited):</label
               >
@@ -160,6 +169,15 @@
           <p>Environment: <span id="environment-chosen"></span></p>
           <p>Using Beta: <span id="using-beta">No</span></p>
           <p>Allowed Roles: <span id="allowed-roles-list"></span></p>
+          <div class="user-input-field">
+            <input
+              type="checkbox"
+              id="auto-load-post-load"
+              name="auto-load-post-load"
+              value="auto-load-post-load"
+            />
+            <label for="auto-load-post-load">Auto load script?</label>
+          </div>
           <div class="loader" id="loader"></div>
         </div>
       </div>

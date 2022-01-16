@@ -1,12 +1,12 @@
 function addCobrowseScript() {
-  var websocket = "www.glance.net"
-  var domain = "www"
+  var websocket = "www.glance.net";
+  var domain = "www";
 
   if (document.querySelector("#use-beta").checked) {
-    websocket = "beta.glance.net"
-    domain = "beta"
-    document.querySelector("header").style.background = "#BF40BF"
-    document.querySelector("#using-beta").innerText = "Yes"
+    websocket = "beta.glance.net";
+    domain = "beta";
+    document.querySelector("header").style.background = "#BF40BF";
+    document.querySelector("#using-beta").innerText = "Yes";
   }
 
   var theCobrowseScript = document.createElement("script");
@@ -27,9 +27,11 @@ function addCobrowseScript() {
   );
   document.head.append(theCobrowseScript);
 
-  theCobrowseScript.addEventListener("load",(e) => {
-    document.getElementById("cb-version").innerHTML = `Cobrowse script version: ${GLANCE.VERSION}`
-  })
+  theCobrowseScript.addEventListener("load", (e) => {
+    document.getElementById(
+      "cb-version"
+    ).innerHTML = `Cobrowse script version: ${GLANCE.VERSION}`;
+  });
 }
 
 function hideUserInput() {
@@ -44,8 +46,12 @@ function showLoader() {
   document.getElementById("group-id").innerHTML = document.getElementById(
     "groupId"
   ).value;
-  document.querySelector("#allowed-roles-list").innerText = document.querySelector("#allowed-roles").value
-  document.querySelector("#environment-chosen").innerText = document.getElementById("environment").value;
+  document.querySelector(
+    "#allowed-roles-list"
+  ).innerText = document.querySelector("#allowed-roles").value;
+  document.querySelector(
+    "#environment-chosen"
+  ).innerText = document.getElementById("environment").value;
 }
 
 function sessionStarted() {
@@ -57,43 +63,73 @@ function sessionStarted() {
 function submitClicked() {
   console.log("submit button clicked at ", Date());
   const url = new URL(window.location);
-  url.searchParams.set('groupid', document.getElementById("groupId").value);
-  url.searchParams.set('environment', document.getElementById("environment").value);
-  url.searchParams.set('visitorId', document.getElementById("visitorId").value);
-  url.searchParams.set('beta', document.querySelector("#use-beta").checked);
-  url.searchParams.set('allowedroles', encodeURI(document.querySelector("#allowed-roles").value));
-  window.history.pushState({}, '', url)
+  url.searchParams.set("groupid", document.getElementById("groupId").value);
+  url.searchParams.set(
+    "environment",
+    document.getElementById("environment").value
+  );
+  url.searchParams.set("visitorId", document.getElementById("visitorId").value);
+  url.searchParams.set("beta", document.querySelector("#use-beta").checked);
+  url.searchParams.set(
+    "autoload",
+    document.querySelector("#auto-load").checked
+  );
+  document.querySelector(
+    "#auto-load-post-load"
+  ).checked = document.querySelector("#auto-load").checked;
+  url.searchParams.set(
+    "allowedroles",
+    encodeURI(document.querySelector("#allowed-roles").value)
+  );
+  window.history.pushState({}, "", url);
   addCobrowseScript();
   hideUserInput();
   showLoader();
-  document.getElementById("glance-cobrowse").onload = event => {
+  document.getElementById("glance-cobrowse").onload = (event) => {
     GLANCE.Cobrowse.Visitor.addEventListener("sessionstart", sessionStarted);
   };
 }
 
-window.onload = event => {
+window.onload = (event) => {
   document
     .getElementById("visitor-id-button")
     .addEventListener("click", submitClicked);
-    const urlParams = new URLSearchParams(window.location.search)
-    const groupid = urlParams.get('groupid');
-    const environment = urlParams.get('environment');
-    const visitorId = urlParams.get('visitorId');
-    const beta = urlParams.get('beta');
-    const allowedroles = urlParams.get('allowedroles');
-    if (groupid){
-      document.getElementById("groupId").value = groupid
-    }
-    if (environment){
-      document.getElementById("environment").value = environment
-    }
-    if (visitorId) {
-      document.getElementById("visitorId").value = visitorId
-    }
-    if (beta == "true") {
-      document.querySelector("#use-beta").checked = true
-    }
-    if (allowedroles) {
-      document.querySelector("#allowed-roles").value = decodeURI(allowedroles)
-    }
+  const urlParams = new URLSearchParams(window.location.search);
+  const groupid = urlParams.get("groupid");
+  const environment = urlParams.get("environment");
+  const visitorId = urlParams.get("visitorId");
+  const beta = urlParams.get("beta");
+  const autoLoad = urlParams.get("autoload");
+  const allowedroles = urlParams.get("allowedroles");
+  if (groupid) {
+    document.getElementById("groupId").value = groupid;
+  }
+  if (environment) {
+    document.getElementById("environment").value = environment;
+  }
+  if (visitorId) {
+    document.getElementById("visitorId").value = visitorId;
+  }
+  if (beta == "true") {
+    document.querySelector("#use-beta").checked = true;
+  }
+  if (allowedroles) {
+    document.querySelector("#allowed-roles").value = decodeURI(allowedroles);
+  }
+  if (autoLoad == "true") {
+    document.querySelector("#auto-load").checked = true;
+    document.querySelector("#auto-load-post-load").checked = true;
+    submitClicked();
+  }
+
+  document
+    .querySelector("#auto-load-post-load")
+    .addEventListener("change", (event) => {
+      const url = new URL(window.location);
+      url.searchParams.set(
+        "autoload",
+        document.querySelector("#auto-load-post-load").checked
+      );
+      window.history.pushState({}, "", url);
+    });
 };
