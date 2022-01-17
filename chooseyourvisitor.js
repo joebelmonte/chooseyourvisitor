@@ -1,12 +1,17 @@
 function addCobrowseScript() {
   var websocket = "www.glance.net";
-  var domain = "www";
+  var domain = "www.glancecdn.net";
 
-  if (document.querySelector("#use-beta").checked) {
+  if (document.querySelector("#website").value == "beta") {
     websocket = "beta.glance.net";
-    domain = "beta";
+    domain = "beta.glancecdn.net";
     document.querySelector("header").style.background = "#BF40BF";
-    document.querySelector("#using-beta").innerText = "Yes";
+    document.querySelector("#using-website").innerText = "beta.glance.net";
+  } else if (document.querySelector("#website").value == "myglance") {
+    websocket = "www.myglance.net";
+    domain = "cdn.myglance.net";
+    document.querySelector("header").style.background = "#e74c3c";
+    document.querySelector("#using-website").innerText = "myglance.net";
   }
 
   var theCobrowseScript = document.createElement("script");
@@ -23,7 +28,7 @@ function addCobrowseScript() {
   theCobrowseScript.setAttribute("data-ws", websocket);
   theCobrowseScript.setAttribute(
     "src",
-    `https://${domain}.glancecdn.net/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`
+    `https://${domain}/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`
   );
   document.head.append(theCobrowseScript);
 
@@ -69,7 +74,7 @@ function submitClicked() {
     document.getElementById("environment").value
   );
   url.searchParams.set("visitorId", document.getElementById("visitorId").value);
-  url.searchParams.set("beta", document.querySelector("#use-beta").checked);
+  url.searchParams.set("website", document.querySelector("#website").value);
   url.searchParams.set(
     "autoload",
     document.querySelector("#auto-load").checked
@@ -98,7 +103,7 @@ window.onload = (event) => {
   const groupid = urlParams.get("groupid");
   const environment = urlParams.get("environment");
   const visitorId = urlParams.get("visitorId");
-  const beta = urlParams.get("beta");
+  const website = urlParams.get("website");
   const autoLoad = urlParams.get("autoload");
   const allowedroles = urlParams.get("allowedroles");
   if (groupid) {
@@ -110,8 +115,11 @@ window.onload = (event) => {
   if (visitorId) {
     document.getElementById("visitorId").value = visitorId;
   }
-  if (beta == "true") {
-    document.querySelector("#use-beta").checked = true;
+  if (website == "beta") {
+    document.querySelector("#website").value = "beta";
+  }
+  if (website == "myglance") {
+    document.querySelector("#website").value = "myglance";
   }
   if (allowedroles) {
     document.querySelector("#allowed-roles").value = decodeURI(allowedroles);

@@ -136,13 +136,12 @@
               </select>
             </div>
             <div class="user-input-field">
-              <input
-                type="checkbox"
-                id="use-beta"
-                name="use-beta"
-                value="Beta"
-              />
-              <label for="use-beta">Use beta.glance.net?</label>
+              Website:
+              <select id="website">
+                <option value="glance">glance.net</option>
+                <option value="beta">beta.glance.net</option>
+                <option value="myglance">myglance.net</option>
+              </select>
             </div>
             <div class="user-input-field">
               <input
@@ -167,7 +166,7 @@
           <p>Visitor ID: <span id="visitor-id"></span></p>
           <p>Group ID: <span id="group-id"></span></p>
           <p>Environment: <span id="environment-chosen"></span></p>
-          <p>Using Beta: <span id="using-beta">No</span></p>
+          <p>Website: <span id="using-website">glance.net</span></p>
           <p>Allowed Roles: <span id="allowed-roles-list"></span></p>
           <div class="user-input-field">
             <input
