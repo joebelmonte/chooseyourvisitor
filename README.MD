@@ -8,6 +8,10 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### January 17, 2022
+
+- Added an option to connect to `myglance.net` in addition to `beta.glance.net` and `www.glance.net`.
+
 ### January 16, 2022
 
 - Added a checkbox setting for `Auto load script`. If checked, the script will automatically load based on the existing configurations without the user having to click the `Submit` button.
