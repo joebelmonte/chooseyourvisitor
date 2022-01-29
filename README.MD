@@ -8,6 +8,12 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### January 29, 2022
+
+- Added an option to set presence to`api` or `off` in the script tag in addition to `on`.
+- Changed the label from `Settings` to `Data-Site`.
+- Fixed a bug where the script tag was being added twice when `Auto load script` was enabled.
+
 ### January 17, 2022
 
 - Added an option to connect to `myglance.net` in addition to `beta.glance.net` and `www.glance.net`.

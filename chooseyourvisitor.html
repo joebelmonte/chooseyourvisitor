@@ -311,24 +311,6 @@
             });
         });
       </script>
-      <a
-        href="#"
-        id="start-cobrowse-random-key"
-        onclick="javascript:return false;"
-        >Test Cobrowse Session</a
-      >
-      <script>
-        window.onload(
-          document
-            .getElementById("start-cobrowse-random-key")
-            .addEventListener("click", function (evt) {
-              GLANCE.Cobrowse.Visitor.startSession({
-                sessionKey: "GLANCE_KEYTYPE_RANDOM",
-              });
-              evt.stopPropagation();
-            })
-        );
-      </script>
       <script src="excel.js"></script>
       <script>
         var buttonClicked = function (e) {

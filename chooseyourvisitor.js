@@ -102,7 +102,8 @@ function submitClicked() {
   };
 }
 
-window.onload = (event) => {
+window.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM fully loaded and parsed");
   document
     .getElementById("visitor-id-button")
     .addEventListener("click", submitClicked);
@@ -151,4 +152,4 @@ window.onload = (event) => {
       );
       window.history.pushState({}, "", url);
     });
-};
+});
