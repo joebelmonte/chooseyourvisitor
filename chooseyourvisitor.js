@@ -18,13 +18,16 @@ function addCobrowseScript() {
   var visitorId = document.getElementById("visitorId").value;
   var groupId = document.getElementById("groupId").value;
   var environment = document.getElementById("environment").value;
+  var presenceSetting = document.getElementById("presence-setting").value;
   theCobrowseScript.setAttribute("id", "glance-cobrowse");
   theCobrowseScript.setAttribute("type", "text/javascript");
   theCobrowseScript.setAttribute("data-groupid", groupId);
+  if (presenceSetting != "off") {
+    theCobrowseScript.setAttribute("data-presence", `${presenceSetting}`);
+  }
   theCobrowseScript.setAttribute("data-site", `${environment}`);
   theCobrowseScript.setAttribute("charset", "UTF-8");
   theCobrowseScript.setAttribute("data-visitorid", visitorId);
-  theCobrowseScript.setAttribute("data-presence", "on");
   theCobrowseScript.setAttribute("data-ws", websocket);
   theCobrowseScript.setAttribute(
     "src",
@@ -68,6 +71,10 @@ function sessionStarted() {
 function submitClicked() {
   console.log("submit button clicked at ", Date());
   const url = new URL(window.location);
+  url.searchParams.set(
+    "presence",
+    document.getElementById("presence-setting").value
+  );
   url.searchParams.set("groupid", document.getElementById("groupId").value);
   url.searchParams.set(
     "environment",
@@ -106,6 +113,10 @@ window.onload = (event) => {
   const website = urlParams.get("website");
   const autoLoad = urlParams.get("autoload");
   const allowedroles = urlParams.get("allowedroles");
+  const presence = urlParams.get("presence");
+  if (presence) {
+    document.getElementById("presence-setting").value = presence;
+  }
   if (groupid) {
     document.getElementById("groupId").value = groupid;
   }
