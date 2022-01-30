@@ -54,6 +54,9 @@ function showLoader() {
   document.getElementById("group-id").innerHTML = document.getElementById(
     "groupId"
   ).value;
+  document.getElementById(
+    "presence-user-setting"
+  ).innerHTML = document.getElementById("presence-setting").value;
   document.querySelector(
     "#allowed-roles-list"
   ).innerText = document.querySelector("#allowed-roles").value;
