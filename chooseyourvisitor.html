@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href="https://html5-templates.com/" />
     <title>Choose Your Visitor Test Page</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
     <meta
       name="description"
       content="Simple HTML5 Page layout template with header, footer, sidebar etc."
@@ -160,12 +161,6 @@
               />
               <label for="auto-load">Auto load script?</label>
             </div>
-            <div class="user-input-field">
-              <label for="allowed-roles"
-                >Specify allowed roles (optional, comma delimited):</label
-              >
-              <input type="text" id="allowed-roles" name="allowed-roles" />
-            </div>
             <input type="button" value="Submit" id="visitor-id-button" />
           </form>
         </div>
@@ -203,23 +198,25 @@
           </p>
         </article>
         <article>
-          <h2>Illud mollis moderatius</h2>
-          <p>
-            Eum facete intellegat ei, ut mazim melius usu. Has elit simul primis
-            ne, regione minimum id cum. Sea deleniti dissentiet ea. Illud mollis
+          <h2>Agent Role "Test1" Content</h2>
+          <p data-agentrole="test1">
+            Only agents in role <b>"test1"</b> should see this content. Eum
+            facete intellegat ei, ut mazim melius usu. Has elit simul primis ne,
+            regione minimum id cum. Sea deleniti dissentiet ea. Illud mollis
             moderatius ut per, at qui ubique populo. Eum ad cibo legimus, vim ei
             quidam fastidii.
           </p>
         </article>
         <article>
-          <h2>Ex ignota epicurei quo</h2>
-          <p>
-            Quo debet vivendo ex. Qui ut admodum senserit partiendo. Id
-            adipiscing disputando eam, sea id magna pertinax concludaturque. Ex
-            ignota epicurei quo, his ex doctus delenit fabellas, erat timeam
-            cotidieque sit in. Vel eu soleat voluptatibus, cum cu exerci
-            mediocritatem. Malis legere at per, has brute putant animal et, in
-            consul utamur usu.
+          <h2>Agent Role "Test2" Content</h2>
+          <p data-agentrole="test2">
+            Only agents in role <b>"test2"</b> should see this content. Quo
+            debet vivendo ex. Qui ut admodum senserit partiendo. Id adipiscing
+            disputando eam, sea id magna pertinax concludaturque. Ex ignota
+            epicurei quo, his ex doctus delenit fabellas, erat timeam cotidieque
+            sit in. Vel eu soleat voluptatibus, cum cu exerci mediocritatem.
+            Malis legere at per, has brute putant animal et, in consul utamur
+            usu.
           </p>
         </article>
         <article>
@@ -272,16 +269,22 @@
         </div>
         <div><a id="pdf-js" href="#">PDF JavaScript</a></div>
         <div>
-          <a href="javascript:;" id="excel-viewer">Sample Excel File</a>
+          <div>
+            <a href="javascript:;" id="excel-viewer">Sample Excel File</a>
+          </div>
+          <div>
+            <a href="https://glancepro.online/resources/test.xlsx"
+              >Excel File on Differen Domain</a
+            >
+          </div>
+          <div>
+            <a href="https://joebelmonte.site/resources/test.xlsx"
+              >Excel File on Same Domain</a
+            >
+          </div>
         </div>
       </aside>
     </section>
-    <a href="https://glancepro.online/resources/test.xlsx"
-      >Excel File on Differen Domain</a
-    >
-    <a href="https://joebelmonte.site/resources/test.xlsx"
-      >Excel File on Same Domain</a
-    >
     <footer>
       <p>
         &copy; You can copy, edit and publish this template but please leave a
