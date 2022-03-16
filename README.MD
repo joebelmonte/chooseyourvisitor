@@ -12,7 +12,7 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 - Refactored how the role-based masking demo works.
   - No longer accepts a comma delimited list of roles for the purposes of masking the entire page.
-  - There are two sections, labeled `Agent Role "Test1" Content` and `Agent Role "Test 1" Content`, that will be masked unless the agents viewing the session are in roles named `role1` and `role2`, respectively.
+  - There are two sections, labeled `Agent Role "Test1" Content` and `Agent Role "Test2" Content`, that will be masked unless the agents viewing the session are in roles named `role1` and `role2`, respectively.
   - Agents in neither of those roles won't be able to see content in either section.
   - If agents in more than 1 role are viewing the session, both sections will be masked.
 
