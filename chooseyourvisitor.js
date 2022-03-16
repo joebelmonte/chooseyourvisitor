@@ -58,9 +58,6 @@ function showLoader() {
     "presence-user-setting"
   ).innerHTML = document.getElementById("presence-setting").value;
   document.querySelector(
-    "#allowed-roles-list"
-  ).innerText = document.querySelector("#allowed-roles").value;
-  document.querySelector(
     "#environment-chosen"
   ).innerText = document.getElementById("environment").value;
 }
@@ -92,10 +89,6 @@ function submitClicked() {
   document.querySelector(
     "#auto-load-post-load"
   ).checked = document.querySelector("#auto-load").checked;
-  url.searchParams.set(
-    "allowedroles",
-    encodeURI(document.querySelector("#allowed-roles").value)
-  );
   window.history.pushState({}, "", url);
   addCobrowseScript();
   hideUserInput();
@@ -116,7 +109,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const visitorId = urlParams.get("visitorId");
   const website = urlParams.get("website");
   const autoLoad = urlParams.get("autoload");
-  const allowedroles = urlParams.get("allowedroles");
   const presence = urlParams.get("presence");
   if (presence) {
     document.getElementById("presence-setting").value = presence;
@@ -135,9 +127,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
   if (website == "myglance") {
     document.querySelector("#website").value = "myglance";
-  }
-  if (allowedroles) {
-    document.querySelector("#allowed-roles").value = decodeURI(allowedroles);
   }
   if (autoLoad == "true") {
     document.querySelector("#auto-load").checked = true;
