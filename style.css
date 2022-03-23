@@ -298,3 +298,12 @@ input#allowed-roles {
 .user-input-field {
   margin-bottom: 15px;
 }
+
+#pause-session-button {
+  margin-top: 15px;
+}
+
+#pause-session-message {
+  width: 250px;
+  margin-left: 10px;
+}

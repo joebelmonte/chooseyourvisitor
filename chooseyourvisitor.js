@@ -2,6 +2,9 @@ function addCobrowseScript() {
   var websocket = "www.glance.net";
   var domain = "www.glancecdn.net";
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const paused = urlParams.get("paused") === "true" ? 1 : 2;
+
   if (document.querySelector("#website").value == "beta") {
     websocket = "beta.glance.net";
     domain = "beta.glancecdn.net";
@@ -29,6 +32,7 @@ function addCobrowseScript() {
   theCobrowseScript.setAttribute("charset", "UTF-8");
   theCobrowseScript.setAttribute("data-visitorid", visitorId);
   theCobrowseScript.setAttribute("data-ws", websocket);
+  theCobrowseScript.setAttribute("data-startpaused", `${paused}`);
   theCobrowseScript.setAttribute(
     "src",
     `https://${domain}/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`
@@ -66,6 +70,26 @@ function sessionStarted() {
   console.log("the session has started");
   document.getElementById("loader").style.display = "none";
   document.getElementById("status-message").innerHTML = "";
+  document.getElementById("pause-session-button").disabled = false;
+}
+
+function sessionEnded() {
+  console.log("the session has ended");
+  document.getElementById("pause-session-button").disabled = true;
+  const url = new URL(window.location);
+  url.searchParams.set("paused", "false");
+  window.history.pushState({}, "", url);
+}
+
+function checkPausedState() {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  if (urlParams.get("paused") == "true") {
+    document.querySelector("#pause-session-button").innerText =
+      "Unpause Session";
+    // document.querySelector("#glance_showing_status").innerText = "Paused...";
+    document.getElementById("pause-session-button").disabled = false;
+  }
 }
 
 function submitClicked() {
@@ -95,7 +119,31 @@ function submitClicked() {
   showLoader();
   document.getElementById("glance-cobrowse").onload = (event) => {
     GLANCE.Cobrowse.Visitor.addEventListener("sessionstart", sessionStarted);
+    GLANCE.Cobrowse.Visitor.addEventListener("sessionend", sessionEnded);
+    checkPausedState();
   };
+}
+
+function pauseSession() {
+  const url = new URL(window.location);
+  if (!GLANCE.Cobrowse.Visitor.isSessionPaused()) {
+    var params = {
+      pause: true,
+      message: document.querySelector("#pause-session-message").value,
+    };
+    GLANCE.Cobrowse.Visitor.pauseSession(params);
+    document.querySelector("#pause-session-button").innerText =
+      "Unpause Session";
+    document.querySelector("#glance_showing_status").innerText = "Paused...";
+    url.searchParams.set("paused", "true");
+    window.history.pushState({}, "", url);
+  } else {
+    GLANCE.Cobrowse.Visitor.pauseSession({ pause: false });
+    document.querySelector("#pause-session-button").innerText = "Pause Session";
+    document.querySelector("#glance_showing_status").innerText = "Showing Page";
+    url.searchParams.set("paused", "false");
+    window.history.pushState({}, "", url);
+  }
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -143,5 +191,12 @@ window.addEventListener("DOMContentLoaded", (event) => {
         document.querySelector("#auto-load-post-load").checked
       );
       window.history.pushState({}, "", url);
+    });
+
+  document
+    .querySelector("#pause-session-button")
+    .addEventListener("click", (event) => {
+      console.log("session pause button clicked.");
+      pauseSession();
     });
 });
