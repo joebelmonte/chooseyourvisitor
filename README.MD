@@ -8,6 +8,14 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### March 26, 2022
+
+- Added a button to allow the visitor to pause/unpause a session.
+  - The visitor can optionally provide a message to be displayed to the agent.
+- If the page is refreshed during a paused session, the session will resume in a paused state.
+  - This is accomplished by adding the `data-startpaused="1"` attribute to the script tag.
+- New sessions will always start in an unpaused state.
+
 ### March 15, 2022
 
 - Refactored how the role-based masking demo works.
