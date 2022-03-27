@@ -8,6 +8,12 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### March 27, 2022
+
+- Added an alternative session start button.
+  - In addition to starting the session, this button checks to see if the Glance Visitor UI has been loaded. If not, it displays a custom spinner indicating to the visitor that the session is beginning. The spinner is hidden once the session starts.
+  - This is meant to address the fact that the built-in Glance `Session Starting...` UI doesn't show up for the first session after page load.
+
 ### March 26, 2022
 
 - Added a button to allow the visitor to pause/unpause a session.
