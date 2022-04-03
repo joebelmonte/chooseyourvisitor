@@ -1,12 +1,6 @@
-// window.addEventListener("load", event => {
-//   document
-//     .getElementById("redirectPromptCrossDomain")
-//     .addEventListener("click", redirectPromptCrossDomain);
-// });
-
 function pdfRedirect() {
   var params = {
-    url: "https://joebelmonte.site/resources/Glance_User_Provisioning_API.pdf"
+    url: "https://joebelmonte.site/resources/Glance_User_Provisioning_API.pdf",
   };
   if (GLANCE.Cobrowse.Visitor.inSession()) {
     GLANCE.Cobrowse.Visitor.viewPDF(params);
@@ -17,6 +11,6 @@ function pdfRedirect() {
     );
 }
 
-window.addEventListener("load", event => {
+window.addEventListener("load", (event) => {
   document.getElementById("pdf-js").addEventListener("click", pdfRedirect);
 });
