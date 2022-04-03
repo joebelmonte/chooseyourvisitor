@@ -347,3 +347,12 @@ input#allowed-roles {
     transform: rotate(360deg);
   }
 }
+
+#paused-message {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  text-align: center;
+  background: red;
+  display: none;
+}

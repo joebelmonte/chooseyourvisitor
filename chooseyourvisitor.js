@@ -72,7 +72,6 @@ function sessionStarted() {
   document.getElementById("status-message").innerHTML = "";
   document.getElementById("pause-session-button").disabled = false;
   document.querySelector("#pause-session-button").innerText = "Pause Session";
-  document.querySelector("#glance_showing_status").innerText = "Showing Page";
   // Sessions should never start in a paused state.
   // However, I was noticing that if the previous session had started in a paused state,
   // then starting another session w/o refreshing the page would start it as paused, even if
@@ -91,37 +90,6 @@ function sessionEnded() {
   document.querySelector("#pause-session-button").innerText = "Pause Session";
 }
 
-function addPauseMessageToGlanceUi() {
-  // I want to update the Glance UI with a message that the session has been paused
-  // but it hasn't been loaded at this point. So I'm setting up a mutation observer
-  // to listen for when it gets added.
-
-  // Select the node that will be observed for mutations
-  const targetNode = document.querySelector("body");
-
-  // Options for the observer (which mutations to observe)
-  const config = { attributes: true, childList: true, subtree: true };
-
-  // Callback function to execute when mutations are observed
-  const callback = function (mutationsList, observer) {
-    for (const mutation of mutationsList) {
-      if (mutation.target.id === "glance_titlebar") {
-        console.log("mutation.type is :", mutation.type);
-        document.querySelector("#glance_showing_status").innerText =
-          "Paused...";
-        // Don't need to observe anymore
-        observer.disconnect();
-      }
-    }
-  };
-
-  // Create an observer instance linked to the callback function
-  const observer = new MutationObserver(callback);
-
-  // Start observing the target node for configured mutations
-  observer.observe(targetNode, config);
-}
-
 function checkPausedState() {
   const urlParams = new URLSearchParams(window.location.search);
 
@@ -129,7 +97,7 @@ function checkPausedState() {
     document.querySelector("#pause-session-button").innerText =
       "Unpause Session";
     document.getElementById("pause-session-button").disabled = false;
-    addPauseMessageToGlanceUi();
+    document.getElementById("paused-message").style.display = "block";
   }
 }
 
@@ -185,13 +153,13 @@ function pauseSession() {
     GLANCE.Cobrowse.Visitor.pauseSession(params);
     document.querySelector("#pause-session-button").innerText =
       "Unpause Session";
-    document.querySelector("#glance_showing_status").innerText = "Paused...";
+    document.getElementById("paused-message").style.display = "block";
     url.searchParams.set("paused", "true");
     window.history.pushState({}, "", url);
   } else {
     GLANCE.Cobrowse.Visitor.pauseSession({ pause: false });
     document.querySelector("#pause-session-button").innerText = "Pause Session";
-    document.querySelector("#glance_showing_status").innerText = "Showing Page";
+    document.getElementById("paused-message").style.display = "none";
     url.searchParams.set("paused", "false");
     window.history.pushState({}, "", url);
   }
