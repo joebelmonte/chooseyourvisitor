@@ -8,6 +8,13 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### April 3, 2022
+
+- Some enhancements/fixes regarding session pausing/unpausing.
+  - The pausing APIs are only available on versions 5.1 or later of cobrowse, so the relevant portions of the code are now wrapped in if statements to make the page backwards compatible with older CB versions. Previously older CB versions crashed the page.
+  - Added a `title` hover to the `Pause Session` button when it's disabled explaining why it's disabled.
+  - No longer modifying the Glance UI when the session is paused. This was interfering/overwriting localization. There is now a session paused indicator at the top of the page on the visitor side.
+
 ### March 27, 2022
 
 - Added an alternative session start button.
