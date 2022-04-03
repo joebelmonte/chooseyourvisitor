@@ -70,19 +70,26 @@ function sessionStarted() {
   console.log("the session has started");
   document.getElementById("loader").style.display = "none";
   document.getElementById("status-message").innerHTML = "";
-  document.getElementById("pause-session-button").disabled = false;
-  document.querySelector("#pause-session-button").innerText = "Pause Session";
-  // Sessions should never start in a paused state.
-  // However, I was noticing that if the previous session had started in a paused state,
-  // then starting another session w/o refreshing the page would start it as paused, even if
-  // The script tag attribute had been switched to 2
-  GLANCE.Cobrowse.Visitor.pauseSession({ pause: false });
+  if (GLANCE.Cobrowse.Visitor.pauseSession) {
+    // Putting this in an if statement to make it backwards compatible with older versions of CB
+    // Sessions should never start in a paused state.
+    // However, I was noticing that if the previous session had started in a paused state,
+    // then starting another session w/o refreshing the page would start it as paused, even if
+    // The script tag attribute had been switched to 2
+    document.getElementById("pause-session-button").disabled = false;
+    document.getElementById("pause-session-button").setAttribute("title", "");
+    document.querySelector("#pause-session-button").innerText = "Pause Session";
+    GLANCE.Cobrowse.Visitor.pauseSession({ pause: false });
+  }
 }
 
 function sessionEnded() {
   document.getElementById("loader").style.display = "block";
   console.log("the session has ended");
   document.getElementById("pause-session-button").disabled = true;
+  document
+    .getElementById("pause-session-button")
+    .setAttribute("title", "Only available during sessions running CB v 5.1+.");
   const url = new URL(window.location);
   url.searchParams.set("paused", "false");
   window.history.pushState({}, "", url);
@@ -91,19 +98,20 @@ function sessionEnded() {
 }
 
 function checkPausedState() {
-  const urlParams = new URLSearchParams(window.location.search);
+  var urlParams = new URLSearchParams(window.location.search);
 
   if (urlParams.get("paused") == "true") {
     document.querySelector("#pause-session-button").innerText =
       "Unpause Session";
-    document.getElementById("pause-session-button").disabled = false;
     document.getElementById("paused-message").style.display = "block";
   }
 }
 
 function sessionContinued() {
-  if (!GLANCE.Cobrowse.Visitor.isSessionPaused()) {
+  if (typeof GLANCE.Cobrowse.Visitor.pauseSession == "function") {
     document.getElementById("pause-session-button").disabled = false;
+    document.getElementById("pause-session-button").setAttribute("title", "");
+    checkPausedState();
   }
 }
 
@@ -139,7 +147,6 @@ function submitClicked() {
       "sessioncontinue",
       sessionContinued
     );
-    checkPausedState();
   };
 }
 
