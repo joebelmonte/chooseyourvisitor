@@ -8,6 +8,11 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### April 8, 2022
+
+- Added a button to dynamically change the visitor ID after page load.
+  - Only available when using cobrowse version 5.4+.
+
 ### April 3, 2022
 
 - Some enhancements/fixes regarding session pausing/unpausing.

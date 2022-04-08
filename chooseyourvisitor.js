@@ -225,4 +225,19 @@ window.addEventListener("DOMContentLoaded", (event) => {
       console.log("session pause button clicked.");
       pauseSession();
     });
+
+  document
+    .querySelector("#change-visitor-id")
+    .addEventListener("click", (event) => {
+      if (typeof GLANCE.Presence.Visitor.setVisitorId === "function") {
+        var newVisitorId = prompt("Enter new visitor id.");
+        GLANCE.Presence.Visitor.setVisitorId(newVisitorId);
+        document.getElementById("visitor-id").innerHTML = newVisitorId;
+        const url = new URL(window.location);
+        url.searchParams.set("visitorId", newVisitorId);
+        window.history.pushState({}, "", url);
+      } else {
+        alert("Only available on cobrowse version 5.4+.");
+      }
+    });
 });
