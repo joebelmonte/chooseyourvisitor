@@ -1,3 +1,67 @@
+// Session event listeners
+
+function sessionstarting() {
+  console.log("GLANCE SESSION LISTENER: sessionstarting has fired");
+}
+
+function sessionStarted() {
+  console.log("GLANCE SESSION LISTENER: sessionstart has fired");
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("status-message").innerHTML = "";
+  if (GLANCE.Cobrowse.Visitor.pauseSession) {
+    // Putting this in an if statement to make it backwards compatible with older versions of CB
+    // Sessions should never start in a paused state.
+    // However, I was noticing that if the previous session had started in a paused state,
+    // then starting another session w/o refreshing the page would start it as paused, even if
+    // The script tag attribute had been switched to 2
+    document.getElementById("pause-session-button").disabled = false;
+    document.getElementById("pause-session-button").setAttribute("title", "");
+    document.querySelector("#pause-session-button").innerText = "Pause Session";
+    GLANCE.Cobrowse.Visitor.pauseSession({ pause: false });
+  }
+}
+
+function sessionContinued() {
+  console.log("GLANCE SESSION LISTENER: sessioncontinue has fired");
+  if (typeof GLANCE.Cobrowse.Visitor.pauseSession == "function") {
+    document.getElementById("pause-session-button").disabled = false;
+    document.getElementById("pause-session-button").setAttribute("title", "");
+    checkPausedState();
+  }
+}
+
+function sessionEnded() {
+  console.log("GLANCE SESSION LISTENER: sessionend has fired");
+  document.getElementById("loader").style.display = "block";
+  console.log("the session has ended");
+  document.getElementById("pause-session-button").disabled = true;
+  document
+    .getElementById("pause-session-button")
+    .setAttribute("title", "Only available during sessions running CB v 5.1+.");
+  const url = new URL(window.location);
+  url.searchParams.set("paused", "false");
+  window.history.pushState({}, "", url);
+  document.getElementById("glance-cobrowse").dataset.startpaused = 2;
+  document.querySelector("#pause-session-button").innerText = "Pause Session";
+}
+
+function screenshare(e) {
+  console.log(`GLANCE SESSION LISTENER: screenshare has fired: `, e);
+}
+
+function agents(e) {
+  console.log(`GLANCE SESSION LISTENER: agents has fired: `, e);
+}
+
+function glanceSessionEventListeners() {
+  GLANCE.Cobrowse.Visitor.addEventListener("sessionstarting", sessionstarting);
+  GLANCE.Cobrowse.Visitor.addEventListener("sessionstart", sessionStarted);
+  GLANCE.Cobrowse.Visitor.addEventListener("sessioncontinue", sessionContinued);
+  GLANCE.Cobrowse.Visitor.addEventListener("sessionend", sessionEnded);
+  GLANCE.Cobrowse.Visitor.addEventListener("screenshare", screenshare);
+  GLANCE.Cobrowse.Visitor.addEventListener("agents", agents);
+}
+
 function addCobrowseScript() {
   var websocket = "www.glance.net";
   var domain = "www.glancecdn.net";
@@ -66,37 +130,6 @@ function showLoader() {
   ).innerText = document.getElementById("environment").value;
 }
 
-function sessionStarted() {
-  console.log("the session has started");
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("status-message").innerHTML = "";
-  if (GLANCE.Cobrowse.Visitor.pauseSession) {
-    // Putting this in an if statement to make it backwards compatible with older versions of CB
-    // Sessions should never start in a paused state.
-    // However, I was noticing that if the previous session had started in a paused state,
-    // then starting another session w/o refreshing the page would start it as paused, even if
-    // The script tag attribute had been switched to 2
-    document.getElementById("pause-session-button").disabled = false;
-    document.getElementById("pause-session-button").setAttribute("title", "");
-    document.querySelector("#pause-session-button").innerText = "Pause Session";
-    GLANCE.Cobrowse.Visitor.pauseSession({ pause: false });
-  }
-}
-
-function sessionEnded() {
-  document.getElementById("loader").style.display = "block";
-  console.log("the session has ended");
-  document.getElementById("pause-session-button").disabled = true;
-  document
-    .getElementById("pause-session-button")
-    .setAttribute("title", "Only available during sessions running CB v 5.1+.");
-  const url = new URL(window.location);
-  url.searchParams.set("paused", "false");
-  window.history.pushState({}, "", url);
-  document.getElementById("glance-cobrowse").dataset.startpaused = 2;
-  document.querySelector("#pause-session-button").innerText = "Pause Session";
-}
-
 function checkPausedState() {
   var urlParams = new URLSearchParams(window.location.search);
 
@@ -104,14 +137,6 @@ function checkPausedState() {
     document.querySelector("#pause-session-button").innerText =
       "Unpause Session";
     document.getElementById("paused-message").style.display = "block";
-  }
-}
-
-function sessionContinued() {
-  if (typeof GLANCE.Cobrowse.Visitor.pauseSession == "function") {
-    document.getElementById("pause-session-button").disabled = false;
-    document.getElementById("pause-session-button").setAttribute("title", "");
-    checkPausedState();
   }
 }
 
@@ -141,12 +166,7 @@ function submitClicked() {
   hideUserInput();
   showLoader();
   document.getElementById("glance-cobrowse").onload = (event) => {
-    GLANCE.Cobrowse.Visitor.addEventListener("sessionstart", sessionStarted);
-    GLANCE.Cobrowse.Visitor.addEventListener("sessionend", sessionEnded);
-    GLANCE.Cobrowse.Visitor.addEventListener(
-      "sessioncontinue",
-      sessionContinued
-    );
+    glanceSessionEventListeners();
   };
 }
 

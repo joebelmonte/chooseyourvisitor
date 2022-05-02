@@ -13,6 +13,7 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 - Added a link to the page that opens a pop-up window.
   - The pop-up's URL is the same as the current window.
   - If "auto load script" is checked, the session should automatically continue to the pop-up.
+- Refactored/added some event listeners that start with `GLANCE SESSION LISTENER:` for debugging purposes.
 
 ### April 8, 2022
 
