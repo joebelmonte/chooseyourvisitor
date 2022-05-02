@@ -285,8 +285,9 @@
           <a id="pdf" href="/resources/OoPdfFormExample.pdf"
             >PDF with Form Fields Anchor Tag</a
           >
+          <div><a id="pdf-js" href="#">PDF JavaScript</a></div>
         </div>
-        <div><a id="pdf-js" href="#">PDF JavaScript</a></div>
+        <div><a id="pop-up" href="#">Open pop-up window</a></div>
         <div>
           <div>
             <a href="javascript:;" id="excel-viewer">Sample Excel File</a>
@@ -360,6 +361,25 @@
         if (window.location.href.includes("dev")) {
           document.body.style.backgroundColor = "#7bed9f";
         }
+      </script>
+      <script>
+        document
+          .getElementById("pop-up")
+          .addEventListener("click", function () {
+            let windowFeatures =
+              "popup,left=-1000,top=500,width=600,height=600";
+            const url = new URL(window.location);
+
+            function openRequestedPopup() {
+              windowObjectReference = window.open(
+                url.href,
+                "_blank",
+                windowFeatures
+              );
+            }
+
+            openRequestedPopup();
+          });
       </script>
       <div id="session-loader"></div>
       <script src="session-loader.js"></script>
