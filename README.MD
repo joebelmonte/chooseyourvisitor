@@ -8,6 +8,12 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### May 2, 2022
+
+- Added a link to the page that opens a pop-up window.
+  - The pop-up's URL is the same as the current window.
+  - If "auto load script" is checked, the session should automatically continue to the pop-up.
+
 ### April 8, 2022
 
 - Added a button to dynamically change the visitor ID after page load.
