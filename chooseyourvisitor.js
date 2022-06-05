@@ -106,7 +106,7 @@ function addCobrowseScript() {
   theCobrowseScript.addEventListener("load", (e) => {
     document.getElementById(
       "cb-version"
-    ).innerHTML = `Cobrowse script version: ${GLANCE.VERSION}`;
+    ).innerHTML = `Cobrowse script version: ${GLANCE.VERSION}` + ` patch ${GLANCE.PATCH}`;
   });
 }
 
