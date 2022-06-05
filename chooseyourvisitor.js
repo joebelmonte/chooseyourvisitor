@@ -65,6 +65,7 @@ function glanceSessionEventListeners() {
 function addCobrowseScript() {
   var websocket = "www.glance.net";
   var domain = "www.glancecdn.net";
+  var src = "";
 
   const urlParams = new URLSearchParams(window.location.search);
   const paused = urlParams.get("paused") === "true" ? 1 : 2;
@@ -97,16 +98,18 @@ function addCobrowseScript() {
   theCobrowseScript.setAttribute("data-visitorid", visitorId);
   theCobrowseScript.setAttribute("data-ws", websocket);
   theCobrowseScript.setAttribute("data-startpaused", `${paused}`);
-  theCobrowseScript.setAttribute(
-    "src",
-    `https://${domain}/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`
-  );
+  if (document.getElementById("self-hosted").value != "") {
+    var version = document.getElementById("self-hosted").value;
+    src = `./self-hosted-scripts/cobrowse_${version}/js/GlanceCobrowseLoader_${version}M.js`;
+  } else {
+    src = `https://${domain}/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`;
+  }
+  theCobrowseScript.setAttribute("src", src);
   document.head.append(theCobrowseScript);
 
   theCobrowseScript.addEventListener("load", (e) => {
-    document.getElementById(
-      "cb-version"
-    ).innerHTML = `Cobrowse script version: ${GLANCE.VERSION}` + ` patch ${GLANCE.PATCH}`;
+    document.getElementById("cb-version").innerHTML =
+      `Cobrowse script version: ${GLANCE.VERSION}` + ` patch ${GLANCE.PATCH}`;
   });
 }
 
@@ -158,6 +161,10 @@ function submitClicked() {
     "autoload",
     document.querySelector("#auto-load").checked
   );
+  url.searchParams.set(
+    "selfhost",
+    document.getElementById("self-hosted").value
+  );
   document.querySelector(
     "#auto-load-post-load"
   ).checked = document.querySelector("#auto-load").checked;
@@ -204,6 +211,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const website = urlParams.get("website");
   const autoLoad = urlParams.get("autoload");
   const presence = urlParams.get("presence");
+  const selfHost = urlParams.get("selfhost");
   if (presence) {
     document.getElementById("presence-setting").value = presence;
   }
@@ -221,6 +229,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
   if (website == "myglance") {
     document.querySelector("#website").value = "myglance";
+  }
+  if (selfHost) {
+    document.querySelector("#self-hosted").value = selfHost;
   }
   if (autoLoad == "true") {
     document.querySelector("#auto-load").checked = true;

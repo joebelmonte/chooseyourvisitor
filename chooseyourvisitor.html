@@ -161,6 +161,21 @@
               />
               <label for="auto-load">Auto load script?</label>
             </div>
+            <div class="user-input-field">
+              <label for="self-hosted">Self hosted script version:</label>
+              <input
+                list="self-hosted-versions"
+                name="self-hosted"
+                id="self-hosted"
+              />
+              <datalist id="self-hosted-versions">
+                <option value="4.17.0"> </option>
+                <option value="5.0.0"> </option>
+                <option value="5.2.2"> </option>
+                <option value="5.3.0"> </option>
+                <option value="5.4.3"> </option>
+              </datalist>
+            </div>
             <input type="button" value="Submit" id="visitor-id-button" />
           </form>
         </div>

@@ -8,6 +8,12 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### June 5, 2022
+
+- Added patch number to CB script version displayed at top of page.
+- Added a data list to specify whether to use a self-hosted script or not.
+  - Leave empty to pull the script from the Glance CDN.
+
 ### May 2, 2022
 
 - Added a link to the page that opens a pop-up window.
