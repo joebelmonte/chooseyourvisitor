@@ -53,6 +53,17 @@ function agents(e) {
   console.log(`GLANCE SESSION LISTENER: agents has fired: `, e);
 }
 
+function rcevent(e) {
+  console.log("GLANCE SESSION LISTENER: rcevent has fired: ", e);
+  console.log(
+    "The element that was touched was: ",
+    document.querySelector(e.path)
+  );
+  if (e.type === "inputchange") {
+    console.log("The new value is ", document.querySelector(e.path).value);
+  }
+}
+
 function glanceSessionEventListeners() {
   GLANCE.Cobrowse.Visitor.addEventListener("sessionstarting", sessionstarting);
   GLANCE.Cobrowse.Visitor.addEventListener("sessionstart", sessionStarted);
@@ -60,6 +71,7 @@ function glanceSessionEventListeners() {
   GLANCE.Cobrowse.Visitor.addEventListener("sessionend", sessionEnded);
   GLANCE.Cobrowse.Visitor.addEventListener("screenshare", screenshare);
   GLANCE.Cobrowse.Visitor.addEventListener("agents", agents);
+  GLANCE.Cobrowse.Visitor.addEventListener("rcevent", rcevent);
 }
 
 function addCobrowseScript() {

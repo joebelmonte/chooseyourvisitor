@@ -275,6 +275,48 @@
             </button>
           </div>
         </form>
+        <div class="glance_controllable" id="selective-edit-form">
+          <h2>Form for Selective Editing</h2>
+          <form>
+            <label for="fname">First name:</label><br />
+            <input
+              type="text"
+              id="fname"
+              name="fname"
+              value="John"
+            /><br /><br />
+            <label for="lname">Last name:</label><br />
+            <input
+              type="text"
+              id="lname"
+              name="lname"
+              value="Doe"
+            /><br /><br />
+            <label for="ssn">Social Security Number:</label><br />
+            <span class="glance_masked"></span>
+            <input
+              type="text"
+              id="ssn"
+              name="ssn"
+              value="123-45-1234"
+              glance_masked="true"
+            /><br /><br />
+            <div>
+              <button
+                id="submit-masked-se"
+                class="glance_masked example-button"
+              >
+                Masked Submit
+              </button>
+            </div>
+            <br />
+            <div>
+              <button id="submit-not-masked-se" class="example-button">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
         <div id="pause-session-section">
           <button
             type="button"
@@ -350,27 +392,6 @@
             });
         });
       </script>
-      <script src="excel.js"></script>
-      <script>
-        var buttonClicked = function (e) {
-          e.preventDefault();
-          document.getElementById("submit-masked").classList.toggle("green");
-        };
-
-        var buttonClicked2 = function (e) {
-          e.preventDefault();
-          document
-            .getElementById("submit-not-masked")
-            .classList.toggle("green");
-        };
-
-        document
-          .getElementById("submit-masked")
-          .addEventListener("click", buttonClicked);
-        document
-          .getElementById("submit-not-masked")
-          .addEventListener("click", buttonClicked2);
-      </script>
       <script>
         // Change backgroundcolor if on dev
         if (window.location.href.includes("dev")) {
@@ -405,5 +426,7 @@
     <div id="paused-message">
       The session is paused.
     </div>
+    <script src="excel.js"></script>
+    <script src="utilities.js"></script>
   </body>
 </html>
