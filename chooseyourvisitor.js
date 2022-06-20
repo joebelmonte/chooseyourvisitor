@@ -53,6 +53,34 @@ function agents(e) {
   console.log(`GLANCE SESSION LISTENER: agents has fired: `, e);
 }
 
+function rcevent(e) {
+  console.log("GLANCE SESSION LISTENER: rcevent has fired: ", e);
+  console.log(
+    "The element that was touched was: ",
+    document.querySelector(e.path)
+  );
+  if (document.querySelector(e.path).value) {
+    console.log("The value is ", document.querySelector(e.path).value);
+  }
+}
+
+function rc(e) {
+  var status = e.enabled === true ? "started" : "ended";
+  console.log(`GLANCE SESSION LISTENER: Selective Editing has ${status}.`, e);
+}
+
+function rcrequested(callback) {
+  console.log("GLANCE SESSION LISTENER: Selective Editing has been requested.");
+  callback.accept = function () {
+    console.log("Selective editing accepted.");
+    GLANCE.Cobrowse.Visitor.enableRC(true);
+  };
+  callback.decline = function () {
+    console.log("Selective editing declined.");
+    GLANCE.Cobrowse.Visitor.enableRC(false);
+  };
+}
+
 function glanceSessionEventListeners() {
   GLANCE.Cobrowse.Visitor.addEventListener("sessionstarting", sessionstarting);
   GLANCE.Cobrowse.Visitor.addEventListener("sessionstart", sessionStarted);
@@ -60,6 +88,9 @@ function glanceSessionEventListeners() {
   GLANCE.Cobrowse.Visitor.addEventListener("sessionend", sessionEnded);
   GLANCE.Cobrowse.Visitor.addEventListener("screenshare", screenshare);
   GLANCE.Cobrowse.Visitor.addEventListener("agents", agents);
+  GLANCE.Cobrowse.Visitor.addEventListener("rcevent", rcevent);
+  GLANCE.Cobrowse.Visitor.addEventListener("rc", rc);
+  GLANCE.Cobrowse.Visitor.addEventListener("rcrequested", rcrequested);
 }
 
 function addCobrowseScript() {
