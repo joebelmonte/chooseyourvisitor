@@ -8,6 +8,10 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### June 20, 2022
+
+- Added section for Restricted Editing demo
+
 ### June 5, 2022
 
 - Added patch number to CB script version displayed at top of page.
