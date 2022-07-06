@@ -12,57 +12,10 @@
       content="Simple HTML5 Page layout template with header, footer, sidebar etc."
     />
     <link rel="stylesheet" href="style.css" />
-    <script>
-      var GLANCE_COBROWSE = {};
-    </script>
-    <script>
-      var map = {};
-      onkeydown = onkeyup = function (e) {
-        e = e || event; // to deal with IE
-        map[e.keyCode] = e.type == "keydown";
-        if (map[16] && (map[8] || map[46])) {
-          // shift is 16, backspace is 8, delete is 46
-          GLANCE.Cobrowse.Visitor.showTerms({
-            sessionKey: "GLANCE_KEYTYPE_RANDOM",
-          });
-        }
-      };
-    </script>
     <script src="chooseyourvisitor.js"></script>
     <script src="crossdomain.js"></script>
     <script src="pdf.js"></script>
     <script src="masking-logic.js"></script>
-    <style>
-      .loader {
-        border: 16px solid #f3f3f3;
-        border-radius: 50%;
-        border-top: 16px solid #3498db;
-        width: 120px;
-        height: 120px;
-        -webkit-animation: spin 2s linear infinite; /* Safari */
-        animation: spin 2s linear infinite;
-      }
-      /* Safari */
-      @-webkit-keyframes spin {
-        0% {
-          -webkit-transform: rotate(0deg);
-        }
-        100% {
-          -webkit-transform: rotate(360deg);
-        }
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      #user-feedback {
-        display: none;
-      }
-    </style>
   </head>
   <body>
     <header>
@@ -77,9 +30,7 @@
       </div>
       <nav>
         <ul>
-          <li
-            onclick='GLANCE.Cobrowse.Visitor.startSession("GLANCE_KEYTYPE_RANDOM")'
-          >
+          <li id="start-the-session">
             <a href="#">Cobrowse</a>
           </li>
           <li glance_button="toggleButton">
@@ -372,54 +323,13 @@
       </p>
       <address>Contact: <a href="mailto:me@example.com">Mail me</a></address>
       <li class="seo-footer--reserved-link-items seo-footer--last-item">
-        <a
-          href="#"
-          onclick="javascript:return false;"
-          id="share-user-screen"
-          name="share-user-screen"
+        <a href="#" id="share-user-screen" name="share-user-screen"
           >Show Terms (Always Use Random Session Key)</a
         >
       </li>
-      <script type="text/javascript">
-        window.addEventListener("load", () => {
-          console.log("this page loaded!");
-          document
-            .getElementById("share-user-screen")
-            .addEventListener("click", () => {
-              GLANCE.Cobrowse.Visitor.showTerms({
-                sessionKey: "GLANCE_KEYTYPE_RANDOM",
-              });
-            });
-        });
-      </script>
-      <script>
-        // Change backgroundcolor if on dev
-        if (window.location.href.includes("dev")) {
-          document.body.style.backgroundColor = "#7bed9f";
-        }
-      </script>
-      <script>
-        document
-          .getElementById("pop-up")
-          .addEventListener("click", function () {
-            let windowFeatures =
-              "popup,left=-1000,top=500,width=600,height=600";
-            const url = new URL(window.location);
-
-            function openRequestedPopup() {
-              windowObjectReference = window.open(
-                url.href,
-                "_blank",
-                windowFeatures
-              );
-            }
-
-            openRequestedPopup();
-          });
-      </script>
       <div id="session-loader"></div>
       <script src="session-loader.js"></script>
-      <button type="button" onclick="startSessionWithLoader()">
+      <button type="button" id="start-session-with-loader">
         Start Session with Custom Loader.
       </button>
     </footer>
