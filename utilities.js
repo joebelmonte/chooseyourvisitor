@@ -18,6 +18,21 @@ var buttonClicked2Se = function (e) {
   document.getElementById("submit-not-masked-se").classList.toggle("green");
 };
 
+var startSessionVideo = function (e) {
+  var videoParam = e.target.getAttribute("data-video-type");
+  if (videoParam) {
+    var options = {
+      video: videoParam,
+      sessionKey: "GLANCE_KEYTYPE_RANDOM",
+    };
+    try {
+      GLANCE.Cobrowse.Visitor.startSession(options);
+    } catch (e) {
+      alert("Script not loaded.");
+    }
+  }
+};
+
 document
   .getElementById("submit-masked")
   .addEventListener("click", buttonClicked);
@@ -30,6 +45,11 @@ document
 document
   .getElementById("submit-not-masked-se")
   .addEventListener("click", buttonClicked2Se);
+document
+  .getElementById("video-start-buttons")
+  .addEventListener("click", (e) => {
+    startSessionVideo(e);
+  });
 
 // Hot key
 var map = {};
@@ -79,4 +99,11 @@ document.getElementById("start-the-session").addEventListener("click", () => {
   } catch (e) {
     alert("Script not loaded.");
   }
+});
+
+// Listen for cross domain events
+
+window.addEventListener("message", (event) => {
+  if (event.origin === "https://glancepro.online")
+    console.log("Location of the opened window: ", event.data);
 });
