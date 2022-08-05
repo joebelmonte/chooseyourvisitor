@@ -8,6 +8,10 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### July 6, 2022
+
+- Removed inline styles and scripts
+
 ### June 20, 2022
 
 - Added section for Restricted Editing demo

@@ -1,3 +1,5 @@
+var GLANCE_COBROWSE = {};
+
 function getMaskList(agentlist) {
   // This block of code determines if there are agents of more than 1 role in the session.
   var roles = [];
