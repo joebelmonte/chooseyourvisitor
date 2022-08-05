@@ -118,6 +118,7 @@ function addCobrowseScript() {
   var groupId = document.getElementById("groupId").value;
   var environment = document.getElementById("environment").value;
   var presenceSetting = document.getElementById("presence-setting").value;
+  var video = document.getElementById("video-at-start").value;
   theCobrowseScript.setAttribute("id", "glance-cobrowse");
   theCobrowseScript.setAttribute("type", "text/javascript");
   theCobrowseScript.setAttribute("data-groupid", groupId);
@@ -129,6 +130,9 @@ function addCobrowseScript() {
   theCobrowseScript.setAttribute("data-visitorid", visitorId);
   theCobrowseScript.setAttribute("data-ws", websocket);
   theCobrowseScript.setAttribute("data-startpaused", `${paused}`);
+  if (video != "default") {
+    theCobrowseScript.setAttribute("data-video", `${video}`);
+  }
   if (document.getElementById("self-hosted").value != "") {
     var version = document.getElementById("self-hosted").value;
     src = `./self-hosted-scripts/cobrowse_${version}/js/GlanceCobrowseLoader_${version}M.js`;
@@ -155,6 +159,9 @@ function showLoader() {
   ).value;
   document.getElementById("group-id").innerHTML = document.getElementById(
     "groupId"
+  ).value;
+  document.getElementById("video-setting").innerHTML = document.getElementById(
+    "video-at-start"
   ).value;
   document.getElementById(
     "presence-user-setting"
@@ -188,6 +195,10 @@ function submitClicked() {
   );
   url.searchParams.set("visitorId", document.getElementById("visitorId").value);
   url.searchParams.set("website", document.querySelector("#website").value);
+  url.searchParams.set(
+    "video",
+    document.querySelector("#video-at-start").value
+  );
   url.searchParams.set(
     "autoload",
     document.querySelector("#auto-load").checked
@@ -240,6 +251,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const environment = urlParams.get("environment");
   const visitorId = urlParams.get("visitorId");
   const website = urlParams.get("website");
+  const video = urlParams.get("video");
   const autoLoad = urlParams.get("autoload");
   const presence = urlParams.get("presence");
   const selfHost = urlParams.get("selfhost");
@@ -260,6 +272,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
   if (website == "myglance") {
     document.querySelector("#website").value = "myglance";
+  }
+  if (video) {
+    document.querySelector("#video-at-start").value = video;
   }
   if (selfHost) {
     document.querySelector("#self-hosted").value = selfHost;

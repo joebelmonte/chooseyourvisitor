@@ -104,6 +104,15 @@
               </select>
             </div>
             <div class="user-input-field">
+              Video at session start:
+              <select id="video-at-start">
+                <option value="default">Group Default</option>
+                <option value="off">Off</option>
+                <option value="large">Large</option>
+                <option value="small">Small</option>
+              </select>
+            </div>
+            <div class="user-input-field">
               <input
                 type="checkbox"
                 id="auto-load"
@@ -142,6 +151,9 @@
           <p>Presence: <span id="presence-user-setting"></span></p>
           <p>Data-Site: <span id="environment-chosen"></span></p>
           <p>Website: <span id="using-website">glance.net</span></p>
+          <p>
+            Video at session start: <span id="video-setting">glance.net</span>
+          </p>
           <div class="user-input-field">
             <input
               type="checkbox"
@@ -309,6 +321,23 @@
             <a href="https://joebelmonte.site/resources/test.xlsx"
               >Excel File on Same Domain</a
             >
+          </div>
+        </div>
+        <div id="video-start-buttons">
+          <div>
+            <button id="no-video-button" data-video-type="off">
+              Start Session with No Video
+            </button>
+          </div>
+          <div>
+            <button id="large-video-button" data-video-type="large">
+              Start Session with Large Video
+            </button>
+          </div>
+          <div>
+            <button id="small-video-button" data-video-type="small">
+              Start Session with Small Video
+            </button>
           </div>
         </div>
       </aside>

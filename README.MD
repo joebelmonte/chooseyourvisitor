@@ -8,6 +8,11 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### August 5, 2022
+
+- Added `video on session start` as a configuration option
+- Added buttons to start the session in large/small/off video mode using the api to override group default and script tag.
+
 ### July 6, 2022
 
 - Removed inline styles and scripts
