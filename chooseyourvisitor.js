@@ -101,16 +101,37 @@ function addCobrowseScript() {
   const urlParams = new URLSearchParams(window.location.search);
   const paused = urlParams.get("paused") === "true" ? 1 : 2;
 
-  if (document.querySelector("#website").value == "beta") {
-    websocket = "beta.glance.net";
-    domain = "beta.glancecdn.net";
-    document.querySelector("header").style.background = "#BF40BF";
-    document.querySelector("#using-website").innerText = "beta.glance.net";
-  } else if (document.querySelector("#website").value == "myglance") {
-    websocket = "www.myglance.net";
-    domain = "cdn.myglance.net";
-    document.querySelector("header").style.background = "#e74c3c";
-    document.querySelector("#using-website").innerText = "myglance.net";
+  const websiteSelection = document.querySelector("#website").value;
+
+  switch (websiteSelection) {
+    case "beta":
+      websocket = "beta.glance.net";
+      domain = "beta.glancecdn.net";
+      document.querySelector("header").style.background = "#BF40BF";
+      document.querySelector("#using-website").innerText = "beta.glance.net";
+      break;
+    case "myglance":
+      websocket = "www.myglance.net";
+      domain = "cdn.myglance.net";
+      document.querySelector("header").style.background = "#e74c3c";
+      document.querySelector("#using-website").innerText = "myglance.net";
+      break;
+    case "dw1":
+      websocket = "dw1.myglance.org";
+      domain = "cdn1.myglance.org";
+      document.querySelector("header").style.background = "#218c74";
+      document.querySelector("#using-website").innerText = "dw1.myglance.org";
+      break;
+    case "dw2":
+      websocket = "dw2.myglance.org";
+      domain = "cdn2.myglance.org";
+      document.querySelector("header").style.background = "#b71540";
+      document.querySelector("#using-website").innerText = "dw1.myglance.org";
+      break;
+    default:
+      var websocket = "www.glance.net";
+      var domain = "www.glancecdn.net";
+      break;
   }
 
   var theCobrowseScript = document.createElement("script");
@@ -154,21 +175,16 @@ function hideUserInput() {
 
 function showLoader() {
   document.getElementById("user-feedback").style.display = "block";
-  document.getElementById("visitor-id").innerHTML = document.getElementById(
-    "visitorId"
-  ).value;
-  document.getElementById("group-id").innerHTML = document.getElementById(
-    "groupId"
-  ).value;
-  document.getElementById("video-setting").innerHTML = document.getElementById(
-    "video-at-start"
-  ).value;
-  document.getElementById(
-    "presence-user-setting"
-  ).innerHTML = document.getElementById("presence-setting").value;
-  document.querySelector(
-    "#environment-chosen"
-  ).innerText = document.getElementById("environment").value;
+  document.getElementById("visitor-id").innerHTML =
+    document.getElementById("visitorId").value;
+  document.getElementById("group-id").innerHTML =
+    document.getElementById("groupId").value;
+  document.getElementById("video-setting").innerHTML =
+    document.getElementById("video-at-start").value;
+  document.getElementById("presence-user-setting").innerHTML =
+    document.getElementById("presence-setting").value;
+  document.querySelector("#environment-chosen").innerText =
+    document.getElementById("environment").value;
 }
 
 function checkPausedState() {
@@ -207,9 +223,8 @@ function submitClicked() {
     "selfhost",
     document.getElementById("self-hosted").value
   );
-  document.querySelector(
-    "#auto-load-post-load"
-  ).checked = document.querySelector("#auto-load").checked;
+  document.querySelector("#auto-load-post-load").checked =
+    document.querySelector("#auto-load").checked;
   window.history.pushState({}, "", url);
   addCobrowseScript();
   hideUserInput();
@@ -267,11 +282,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
   if (visitorId) {
     document.getElementById("visitorId").value = visitorId;
   }
-  if (website == "beta") {
-    document.querySelector("#website").value = "beta";
-  }
-  if (website == "myglance") {
-    document.querySelector("#website").value = "myglance";
+  switch (website) {
+    case "beta":
+      document.querySelector("#website").value = "beta";
+      break;
+    case "myglance":
+      document.querySelector("#website").value = "myglance";
+      break;
+    case "dw1":
+      document.querySelector("#website").value = "dw1";
+      break;
+    case "dw2":
+      document.querySelector("#website").value = "dw2";
+      break;
+    default:
+      document.querySelector("#website").value = "glance";
+      break;
   }
   if (video) {
     document.querySelector("#video-at-start").value = video;

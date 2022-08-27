@@ -8,6 +8,10 @@ Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/de
 
 ## Release Notes
 
+### August 27, 2022
+
+- Added `dw1` and `dw2` as website options.
+
 ### August 5, 2022
 
 - Added `video on session start` as a configuration option
