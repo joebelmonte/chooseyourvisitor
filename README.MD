@@ -2,11 +2,17 @@
 
 ## By Joe Belmonte
 
-Production deployed here: [Choose Your Visitor](https://joebelmonte.site/chooseyourvisitor.html)
+Production deployed here: [Choose Your Visitor](https://www.glancedev1.com/joeb/cyv/chooseyourvisitor.html)
 
-Dev version deployed here: [Choose Your Visitor Dev](https://joebelmonte.site/dev/cyv/chooseyourvisitor.html)
+Dev version deployed here: [Choose Your Visitor Dev](https://www.glancedev1.com/joeb/dev/cyv/chooseyourvisitor.html)
 
 ## Release Notes
+
+### May 15, 2023
+
+- Moved deployment to glancedev1.com domain.
+- Added `dw3` and `dw4` as website options.
+- Added 6.3.1 as self-hosted script option.
 
 ### August 27, 2022
 

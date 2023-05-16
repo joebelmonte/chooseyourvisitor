@@ -74,7 +74,7 @@ window.addEventListener("load", () => {
 });
 
 // Change backgroundcolor if on dev
-if (window.location.href.includes("joebelmonte.site/dev/")) {
+if (window.location.href.includes("glancedev1.com/joeb/dev/")) {
   document.body.style.backgroundColor = "#7bed9f";
 }
 
