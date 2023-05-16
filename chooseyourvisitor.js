@@ -119,14 +119,26 @@ function addCobrowseScript() {
     case "dw1":
       websocket = "dw1.myglance.org";
       domain = "cdn1.myglance.org";
-      document.querySelector("header").style.background = "#218c74";
+      document.querySelector("header").style.background = "#a4fba6";
       document.querySelector("#using-website").innerText = "dw1.myglance.org";
       break;
     case "dw2":
       websocket = "dw2.myglance.org";
       domain = "cdn2.myglance.org";
-      document.querySelector("header").style.background = "#b71540";
-      document.querySelector("#using-website").innerText = "dw1.myglance.org";
+      document.querySelector("header").style.background = "#4ae54a";
+      document.querySelector("#using-website").innerText = "dw2.myglance.org";
+      break;
+    case "dw3":
+      websocket = "dw3.myglance.org";
+      domain = "cdn3.myglance.org";
+      document.querySelector("header").style.background = "#30cb00";
+      document.querySelector("#using-website").innerText = "dw3.myglance.org";
+      break;
+    case "dw4":
+      websocket = "dw4.myglance.org";
+      domain = "cdn4.myglance.org";
+      document.querySelector("header").style.background = "#0f9200";
+      document.querySelector("#using-website").innerText = "dw4.myglance.org";
       break;
     default:
       var websocket = "www.glance.net";
@@ -156,7 +168,7 @@ function addCobrowseScript() {
   }
   if (document.getElementById("self-hosted").value != "") {
     var version = document.getElementById("self-hosted").value;
-    src = `./self-hosted-scripts/cobrowse_${version}/js/GlanceCobrowseLoader_${version}M.js`;
+    src = `./self-hosted-scripts/cobrowse_${version}/cobrowse/js/GlanceCobrowseLoader_${version}M.js`;
   } else {
     src = `https://${domain}/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`;
   }
@@ -294,6 +306,12 @@ window.addEventListener("DOMContentLoaded", (event) => {
       break;
     case "dw2":
       document.querySelector("#website").value = "dw2";
+      break;
+    case "dw3":
+      document.querySelector("#website").value = "dw3";
+      break;
+    case "dw4":
+      document.querySelector("#website").value = "dw4";
       break;
     default:
       document.querySelector("#website").value = "glance";
