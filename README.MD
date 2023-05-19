@@ -8,6 +8,11 @@ Dev version deployed here: [Choose Your Visitor Dev](https://www.glancedev1.com/
 
 ## Release Notes
 
+### May 19, 2023
+
+- Refactored code related to self-hosted script versions. Added back several versions as options.
+- Included folder with those self-hosted script versions in the repo.
+
 ### May 15, 2023
 
 - Moved deployment to glancedev1.com domain.

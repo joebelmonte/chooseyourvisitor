@@ -1,0 +1,666 @@
+/*
+ Copyright 2022 Glance Networks, Inc.
+*/
+'use strict';
+var GLANCE_LOGGER = !0, GlanceLogger = {sanitize:function(a) {
+  return a.replace(/[\r\n]/g, " ").replace("<", "&lt;");
+}, _log:function(a, ...b) {
+  !window.console || !window.console[a] || window.GLANCE_COBROWSE && window.GLANCE_COBROWSE.disableLogging || (b = b.map(f => {
+    if ("object" === typeof f) {
+      try {
+        f = JSON.stringify(f);
+      } catch (c) {
+        console.error(c), f = "unable to convert object to string";
+      }
+    }
+    return "string" === typeof f ? GlanceLogger.sanitize(f) : f;
+  }), window.console[a](...b));
+}, log:function(...a) {
+  GlanceLogger._log("log", ...a);
+}, error:function(...a) {
+  GlanceLogger._log("error", ...a);
+}}, LOG_DIFFS = !1, LOG_DIFFDET = !1, LOG_DRAW = !1, LOG_PRES = !0, LOG_CBSTATE = !1, LOG_IFRAME = !1, LOG_SCROLL = !1, LOG_EVENTS = !1, LOG_LOADER = !1, LOG_UI = !1, LOG_FOCUS = !1, LOG_XDOM = !0, LOG_C3P = !1, LOG_PDF = !1, LOG_STYLES = !1, LOG_GEST = !1, LOG_MSG = !1, LOG_RES = !0, LOG_RC = !1, LOG_SD = !1, LOG_VID = !0, LOG_MASK = !1, LOG_DOC = !1, LOG_XLS = !1, LOG_SS = !1, debuglog = GLANCE_LOGGER ? function(...a) {
+  GlanceLogger.log("DEBUG:", ...a);
+} : function() {
+}, diffslog = GLANCE_LOGGER && LOG_DIFFS ? function(...a) {
+  GlanceLogger.log("DIFFS:", ...a);
+} : function() {
+}, diffdetlog = GLANCE_LOGGER && LOG_DIFFDET ? function(...a) {
+  GlanceLogger.log("DIFFDET:", ...a);
+} : function() {
+}, drawlog = GLANCE_LOGGER && LOG_DRAW ? function(...a) {
+  GlanceLogger.log("DRAW:", ...a);
+} : function() {
+}, preslog = LOG_PRES ? function(...a) {
+  GlanceLogger.log("PRES:", ...a);
+} : function() {
+}, cbstatelog = GLANCE_LOGGER && LOG_CBSTATE ? function(...a) {
+  GlanceLogger.log("CBSTATE:", ...a);
+} : function() {
+}, iframelog = GLANCE_LOGGER && LOG_IFRAME ? function(...a) {
+  GlanceLogger.log("IFRAME:", ...a);
+} : function() {
+}, scrolllog = GLANCE_LOGGER && LOG_SCROLL ? function(...a) {
+  GlanceLogger.log("SCROLL:", ...a);
+} : function() {
+}, eventslog = GLANCE_LOGGER && LOG_EVENTS ? function(...a) {
+  GlanceLogger.log("EVENTS:", ...a);
+} : function() {
+}, loaderlog = GLANCE_LOGGER && LOG_LOADER ? function(...a) {
+  GlanceLogger.log("LOADER:", ...a);
+} : function() {
+}, uilog = GLANCE_LOGGER && LOG_UI ? function(...a) {
+  GlanceLogger.log("UI:", ...a);
+} : function() {
+}, focuslog = GLANCE_LOGGER && LOG_FOCUS ? function(...a) {
+  GlanceLogger.log("FOCUS:", ...a);
+} : function() {
+}, xdomlog = LOG_XDOM ? function(...a) {
+  GlanceLogger.log("XDOM:", ...a);
+} : function() {
+}, c3plog = GLANCE_LOGGER && LOG_C3P ? function(...a) {
+  GlanceLogger.log("C3P:", ...a);
+} : function() {
+}, pdflog = GLANCE_LOGGER && LOG_PDF ? function(...a) {
+  GlanceLogger.log("PDF:", ...a);
+} : function() {
+}, stylelog = GLANCE_LOGGER && LOG_STYLES ? function(...a) {
+  GlanceLogger.log("STYLES:", ...a);
+} : function() {
+}, gestlog = GLANCE_LOGGER && LOG_GEST ? function(...a) {
+  GlanceLogger.log("GEST:", ...a);
+} : function() {
+}, msglog = GLANCE_LOGGER && LOG_MSG ? function(...a) {
+  GlanceLogger.log("MSG:", ...a);
+} : function() {
+}, reslog = GLANCE_LOGGER && LOG_RES ? function(...a) {
+  GlanceLogger.log("RES:", ...a);
+} : function() {
+}, rclog = GLANCE_LOGGER && LOG_RC ? function(...a) {
+  GlanceLogger.log("RC:", ...a);
+} : function() {
+}, sdlog = GLANCE_LOGGER && LOG_SD ? function(...a) {
+  GlanceLogger.log("SD:", ...a);
+} : function() {
+}, vidlog = LOG_VID ? function(...a) {
+  GlanceLogger.log("VID:", ...a);
+} : function() {
+}, masklog = GLANCE_LOGGER && LOG_MASK ? function(...a) {
+  GlanceLogger.log("MASK:", ...a);
+} : function() {
+}, doclog = GLANCE_LOGGER && LOG_DOC ? function(...a) {
+  GlanceLogger.log("DOC:", ...a);
+} : function() {
+}, sslog = GLANCE_LOGGER && LOG_SS ? function(...a) {
+  GlanceLogger.log("SS:", ...a);
+} : function() {
+}, assert = GLANCE_LOGGER ? function(a) {
+  if (!a) {
+    if (window.console && window.console.error) {
+      GlanceLogger.error("ASSERT");
+    } else {
+      throw Error("ASSERT");
+    }
+  }
+} : function() {
+};
+function consolelog(...a) {
+  GlanceLogger.log("GLANCE:", ...a);
+}
+function errorlog(...a) {
+  GlanceLogger.error("GLANCE:", ...a);
+}
+;/*
+ Copyright (c) 2018 Glance Networks, Inc.
+*/
+var GLANCE = window.GLANCE || {};
+GLANCE.MINIMIZED = !0;
+var RENDER_SCALE = 1.4;
+function _mod(a, b) {
+  return (a % b + b) % b;
+}
+var _textContent = null;
+async function _loadTextContent(a) {
+  if (_textContent) {
+    return _textContent;
+  }
+  const b = [];
+  for (let f = 1; f <= a.numPages; f++) {
+    (await (await PDFDoc.pdf.getPage(f)).getTextContent()).items.forEach(c => {
+      c.page = f;
+      b.push(c);
+    });
+  }
+  return _textContent = b;
+}
+async function loadPageContent(a) {
+  a = await _loadTextContent(a);
+  const b = [];
+  for (let f = 0; f < a.length; f++) {
+    const c = a[f].page;
+    b[c - 1] || (b[c - 1] = {chunks:[], page:c});
+    0 < a[f].str.length && b[c - 1].chunks.push(a[f].str);
+  }
+  return b;
+}
+function findInChunks(a, b, f) {
+  a = a.trim();
+  if (0 === a.length) {
+    return [];
+  }
+  const c = [0];
+  for (var d = 0; d < b.length - 1; d++) {
+    c.push(c[c.length - 1] + b[d].length + 1);
+  }
+  d = function(g, k) {
+    g = g.toLowerCase();
+    k = k.toLowerCase();
+    let l = [];
+    for (let u = 0;; u++) {
+      u = g.indexOf(k, u);
+      if (0 > u) {
+        break;
+      }
+      l.push(u);
+    }
+    return l;
+  }(b.join(" "), a).map(g => {
+    const k = [];
+    for (let l = 0; l < c.length; l++) {
+      c[l] <= g && k.push({page:f, chunkIndex:l, substringIndex:g - c[l], chunks:[]});
+    }
+    return k[k.length - 1];
+  });
+  for (let g = 0; g < d.length; g++) {
+    let k = d[g].chunkIndex, l = a.length - b[k].length + d[g].substringIndex;
+    if (0 >= l) {
+      d[g].endChunkIndex = k, d[g].endSubstringIndex = d[g].substringIndex + a.length;
+    } else {
+      k++;
+      for (l--; 0 < l - b[k].length;) {
+        l -= b[k++].length + 1;
+      }
+      d[g].endChunkIndex = k;
+      d[g].endSubstringIndex = l;
+    }
+  }
+  return d;
+}
+async function findText(a, b) {
+  return (await loadPageContent(a)).flatMap(f => findInChunks(b, f.chunks, f.page));
+}
+async function highlightText(a, b, f) {
+  async function c(l) {
+    function u() {
+      x = [...document.querySelectorAll("#pdf-text-layer span")];
+    }
+    const q = d[_mod(l, d.length)];
+    q.totalMatches = d.length;
+    const y = q.endChunkIndex - q.chunkIndex + 1;
+    if (q.page === k) {
+      var x = null;
+      for (let r = 0; r < y; r++) {
+        var m = q.chunkIndex + r;
+        u();
+        var n = x[m];
+        for (var p = 0; !n && 1000 > p; p++) {
+          await new Promise(window.requestAnimationFrame), u(), n = x[m];
+        }
+        n && (q.chunks[r] || (q.chunks[r] = n.textContent), m = q.chunks[r], 1 < y && r !== y - 1 && (m += "&nbsp;"), p = l !== f ? "found" : "found-focus", m = r === y - 1 ? m.slice(0, q.endSubstringIndex) + "</span>" + m.slice(q.endSubstringIndex) : m + "</span>", m = 0 === r ? m.slice(0, q.substringIndex) + `<span class="${p}">` + m.slice(q.substringIndex) : `<span class="${p}">` + m, n = n.cloneNode(), n.innerHTML = m, document.querySelector(".findLayer").appendChild(n));
+      }
+    }
+  }
+  clearHighlights();
+  const d = await findText(a, b);
+  if (0 === d.length) {
+    return null;
+  }
+  let g = null, k = null;
+  await async function() {
+    g = d[_mod(f, d.length)];
+    k = g.page;
+    await PDFView.showpage(k, !1);
+  }();
+  for (a = 0; a < d.length; a++) {
+    await c(a);
+  }
+  await c(f);
+  return g;
+}
+function clearHighlights() {
+  const a = document.querySelector(".findLayer");
+  for (; a.firstChild;) {
+    a.removeChild(a.firstChild);
+  }
+}
+var PDFDoc = function() {
+  function a() {
+    b.url = "";
+    b.actualWidth = 0;
+    b.pdf = null;
+    b.pageNumber = 0;
+    b.page = null;
+  }
+  var b = {};
+  a();
+  b.Close = function() {
+    a();
+  };
+  return b;
+}(), PDFView, PDFViewFactory = function() {
+  function a() {
+    this.parentDocEl = window.parent.document.documentElement;
+    this.parentBody = window.parent.document.body;
+  }
+  function b(e) {
+    m.css("display", e);
+  }
+  function f() {
+    var e = $("#the-canvas"), h = e.get(0).height;
+    e = e.get(0).width;
+    $("#annotation-layer").css({left:"0px", top:"0px", height:h + "px", width:e + "px"});
+  }
+  function c(e) {
+    E = e;
+    $("#the-page").css({transform:"scale(" + E + ")"});
+    f();
+  }
+  function d(e) {
+    switch(e) {
+      case "page-fit":
+        var h = Math.floor($(window).width() / PDFDoc.actualWidth * 10) / 10;
+        I = !0;
+        break;
+      default:
+        e = parseFloat(e), "number" === typeof e && (assert(0 < e), h = e, I = !1);
+    }
+    h && c(h);
+  }
+  function g() {
+    if (!F && 1 !== PDFDoc.pageNumber) {
+      return y(PDFDoc.pageNumber - 1);
+    }
+  }
+  function k() {
+    if (!(F || PDFDoc.pageNumber >= PDFDoc.pdf.numPages)) {
+      return y(PDFDoc.pageNumber + 1);
+    }
+  }
+  function l(e) {
+    pdflog("notifyChanged", e);
+    var h = window.GLANCE;
+    h && h.Cobrowse && h.Cobrowse.Visitor && h.Cobrowse.Visitor.loaded && h.Cobrowse.Visitor.notifyChanged(e);
+  }
+  function u(e, h) {
+    p.css("display", "block");
+    const A = document.getElementById("pdf-text-layer");
+    for (; A.firstChild;) {
+      A.removeChild(A.firstChild);
+    }
+    return new Promise(async function(G, v) {
+      p[0].height = e.height;
+      p[0].width = e.width;
+      f();
+      var w = {canvasContext:r, viewport:e};
+      await h.render(w).promise.then(function() {
+        return h.getTextContent();
+      }, v).then(function(z) {
+        const t = $("#the-canvas");
+        t.offset();
+        t.get(0);
+        t.get(0);
+        try {
+          pdfjsLib.renderTextLayer({textContent:z, container:$("#pdf-text-layer").get(0), viewport:e, textDivs:[]});
+        } catch (C) {
+          v(C);
+        }
+      });
+      h.render(w).promise.then(function() {
+        return h.getAnnotations();
+      }, v).then(function(z) {
+        var t = $("#annotation-layer").get(0);
+        t.innerHTML = "";
+        let C = new PDFLinkService;
+        C.setDocument(PDFDoc.pdf);
+        pdfjsLib.AnnotationLayer.render({viewport:e.clone({dontFlip:!0}), div:t, annotations:z, linkService:C, page:h});
+        PDFDoc.agentselected && t.querySelectorAll(".internallink").forEach(K => {
+          K.setAttribute("data-agentinteractive", "remote");
+        });
+        l({canvas:{gcids:[p.attr("data-gcid")]}});
+        G();
+      });
+    });
+  }
+  function q(e, h) {
+    n.css("display", "block");
+    return new Promise(function(A, G) {
+      n.css("width", e.width);
+      n.css("height", e.height);
+      h.getOperatorList().then(function(v) {
+        return (new pdfjsLib.SVGGraphics(h.commonObjs, h.objs)).getSVG(v, e);
+      }).then(function(v) {
+        n.empty();
+        n.append(v);
+        l({styles:!0});
+        A();
+      });
+    });
+  }
+  function y(e, h = !0) {
+    pdflog("showpage", e, "of", PDFDoc.pdf.numPages);
+    e = parseInt(e);
+    if (!jQuery.isNumeric(e) || 0 >= e || e > PDFDoc.pdf.numPages) {
+      return pdflog("invalid page number"), D.val(PDFDoc.pageNumber), null;
+    }
+    if (PDFDoc.pageNumber !== e) {
+      h && closeFind();
+      var A = document.activeElement;
+      assert(PDFDoc.pdf);
+      assert("number" === typeof e);
+      assert(1 <= e && e <= PDFDoc.pdf.numPages);
+      PDFDoc.pageNumber = e;
+      D.prop("disabled", !0);
+      F = !0;
+      return new Promise(function(G, v) {
+        PDFDoc.pdf.getPage(e).then(function(w) {
+          pdflog("getPage got page", e);
+          PDFDoc.page = w;
+          var z = w.getViewport({scale:RENDER_SCALE}), t;
+          "canvas" === PDFDoc.mode && (t = u(z, w));
+          "svg" === PDFDoc.mode && (t = q(z, w));
+          t.then(function() {
+            pdflog("rendered page, viewport width:", z.width);
+            window.scrollTo(0, 0);
+            D.prop("disabled", !1);
+            F = !1;
+            PDFDoc.actualWidth = z.width;
+            D.val(PDFDoc.pageNumber);
+            A.focus();
+            f();
+            G();
+          }, function(C) {
+            v("Failed to render" + C);
+          });
+        }, function(w) {
+          v("Failed to get page:" + w);
+        });
+      });
+    }
+  }
+  function x(e, h) {
+    e ? (B && window.clearTimeout(B), "error" === h && console.error(e), H.html(e), H.attr("class", h), H.css("display", "block"), b("block")) : H.css("display", "none");
+  }
+  var m = $(window.parent.document.getElementById("glance_pdfviewer")), n = $("#the-svg"), p = $("#the-canvas"), r = p[0].getContext("2d"), D = $("#pageselect"), H = jQuery("#message"), E = 1.0, I = !1, B = null, F = !1;
+  a.prototype.hide = function() {
+    this.overflowX = this.parentDocEl.style.overflowX;
+    this.overflowY = this.parentDocEl.style.overflowY;
+    this.parentDocEl.style.overflowX = "hidden";
+    this.parentDocEl.style.overflowY = "hidden";
+    this.overflowXbody = this.parentBody.style.overflowX;
+    this.overflowYbody = this.parentBody.style.overflowY;
+    this.parentBody.style.overflowX = "hidden";
+    this.parentBody.style.overflowY = "hidden";
+  };
+  a.prototype.restore = function() {
+    this.parentDocEl.style.overflowX = this.overflowX;
+    this.parentDocEl.style.overflowY = this.overflowY;
+    this.parentBody.style.overflowX = this.overflowXbody;
+    this.parentBody.style.overflowY = this.overflowYbody;
+  };
+  var J = new a;
+  return {downloading:function(e) {
+    e && (B && window.clearTimeout(B), B = window.setTimeout(function() {
+      x("Downloading " + e.split("/").pop() + "...", "info");
+    }, 500));
+  }, downloadcomplete:function() {
+    B && window.clearTimeout(B);
+    x();
+  }, show:function() {
+    n.css("display", "none");
+    p.css("display", "none");
+    J.hide();
+    assert(PDFDoc.pdf);
+    $("#doctitle").html(PDFDoc.url.split("/").pop());
+    $("#pagetotal").html(PDFDoc.pdf.numPages);
+    D.attr("max", PDFDoc.pdf.numPages);
+    b("block");
+    $(".firstcontrol").focus();
+  }, showpage:y, close:function() {
+    pdflog("closing.  viewer iframe display: ", m.css("display"));
+    "block" === m.css("display") && (J.restore(), b("none"), x(), $("#doctitle").html(""), $("#pagetotal").html(""), $("style[id^=PDFJS_FONT_STYLE_TAG_]").remove(), n.empty(), r.fillStyle = "#FFFFFF", r.fillRect(0, 0, p[0].width, p[0].height), l({canvas:{gcids:[p.attr("data-gcid")]}}), PDFDoc.Close());
+  }, setscale:c, zoomin:function() {
+    c(Math.min(3.0, E + 0.2));
+  }, zoomout:function() {
+    c(Math.max(0.5, E - 0.2));
+  }, zoom:d, forward:k, keydown:function(e) {
+    switch(e.which) {
+      case 33:
+        g();
+        e.preventDefault();
+        break;
+      case 34:
+        k();
+        e.preventDefault();
+        break;
+      case 70:
+        e.ctrlKey && (document.getElementById("find-controls").classList.remove("hidden"), document.getElementById("pdf-find-input").focus(), e.preventDefault());
+    }
+  }, windowresized:function() {
+    I && d("page-fit");
+  }, back:g, message:x};
+}, GPDF = {View:function(a) {
+  var b = a && a.url, f = a && a.data;
+  if (!b && !f) {
+    return Promise.resolve();
+  }
+  pdflog("Viewing", b ? b : "binary string PDF", a.mode);
+  PDFView.downloading(b);
+  (f && !b || a.options && a.options.hideDownload) && $("#pdflink").hide();
+  return pdfjsLib.getDocument(b ? b : {data:f}).promise.then(function(c) {
+    pdflog("getDocument complete:", b);
+    PDFView.downloadcomplete();
+    PDFDoc.pdf = c;
+    PDFDoc.agentselected = a.agentselected || !1;
+    PDFDoc.preview = a.preview || !1;
+    document.body.setAttribute("data-preview", PDFDoc.preview);
+    PDFDoc.url = b ? b : "//";
+    PDFDoc.mode = a.mode || "canvas";
+    PDFView.show();
+    return PDFView.showpage(1);
+  }, function(c) {
+    PDFView.message("Could not open document: " + c.message, "error");
+    throw c;
+  }).then(function() {
+    pdflog("showpage completed");
+    return "Viewing document";
+  });
+}, Close:function() {
+  PDFView.close();
+}}, findIndex = 0, totalMatches = 0;
+function closeFind() {
+  totalMatches = findIndex = 0;
+  document.getElementById("pdf-find-index").innerHTML = findIndex.toString();
+  document.getElementById("pdf-find-length").innerHTML = totalMatches.toString();
+  document.getElementById("pdf-find-input").value = "";
+  clearHighlights();
+  document.getElementById("find-controls").classList.add("hidden");
+}
+var resolveready;
+GPDF.waitready = new Promise(function(a, b) {
+  resolveready = a;
+});
+var DEFAULT_LINK_REL = "noopener noreferrer nofollow", LinkTarget = {NONE:0, SELF:1, BLANK:2, PARENT:3, TOP:4}, NullCharactersRegExp = /\x00/g, InvisibleCharactersRegExp = /[\x01-\x1F]/g;
+$(window).ready(function() {
+  async function a(d) {
+    let g;
+    totalMatches = (null == (g = await highlightText(PDFDoc.pdf, document.getElementById("pdf-find-input").value, d)) ? void 0 : g.totalMatches) || 0;
+    0 === totalMatches ? (document.getElementById("pdf-find-index").innerHTML = "0", document.getElementById("pdf-find-length").innerHTML = "0") : (document.getElementById("pdf-find-index").innerHTML = (_mod(findIndex, totalMatches) + 1).toString(), document.getElementById("pdf-find-length").innerHTML = totalMatches.toString());
+  }
+  function b() {
+    0 !== totalMatches && (findIndex++, findIndex %= totalMatches, a(findIndex));
+  }
+  function f() {
+    0 !== totalMatches && (findIndex--, findIndex %= totalMatches, a(findIndex));
+  }
+  PDFView = PDFViewFactory();
+  $("#closedoc").click(function(d) {
+    window.parent.postMessage("docviewerclosed");
+    GPDF.Close();
+  });
+  $("#pageselect").change(function() {
+    PDFView.showpage(this.value);
+  });
+  $("#pageselect").keypress(function(d) {
+    13 === d.which && PDFView.showpage(this.value);
+  });
+  $("#zoomin").click(PDFView.zoomin);
+  $("#pdf-find-button").click(() => {
+    document.getElementById("find-controls").classList.remove("hidden");
+    document.getElementById("pdf-find-input").focus();
+  });
+  $("#pdf-find-next").click(() => {
+    b();
+  });
+  $("#pdf-find-previous").click(() => {
+    f();
+  });
+  $("#pdf-find-close").click(closeFind);
+  $("#zoomout").click(PDFView.zoomout);
+  $("#zoomselect").change(function() {
+    PDFView.zoom(this.value);
+  });
+  $("#floating-button-previous").click(PDFView.back);
+  $("#floating-button-next").click(PDFView.forward);
+  $("[role=button]").keypress(function(d) {
+    13 === d.which && this.click();
+  });
+  $("#pdflink").click(function() {
+    window.open(PDFDoc.url, "_blank");
+  });
+  let c = document.getElementById("pdf-find-input");
+  c.addEventListener("input", d => a(findIndex = 0));
+  c.addEventListener("keyup", function(d) {
+    "Enter" === d.key ? d.shiftKey ? f() : b() : "Escape" === d.key && closeFind();
+  });
+  $(window).resize(PDFView.windowresized);
+  $(document).keydown(PDFView.keydown);
+  resolveready();
+  GPDF.View();
+});
+function removeNullCharacters(a, b = !1) {
+  if ("string" !== typeof a) {
+    return console.error("The argument must be a string."), a;
+  }
+  b && (a = a.replace(InvisibleCharactersRegExp, " "));
+  return a.replace(NullCharactersRegExp, "");
+}
+function addLinkAttributes(a, {url:b, target:f, rel:c, enabled:d = !0} = {}) {
+  if (!b || "string" !== typeof b) {
+    throw Error('A valid "url" parameter must provided.');
+  }
+  b = (0, removeNullCharacters)(b);
+  d ? a.href = a.title = b : (a.href = "", a.title = `Disabled: ${b}`, a.onclick = () => !1);
+  d = "";
+  switch(f) {
+    case LinkTarget.SELF:
+      d = "_self";
+      break;
+    case LinkTarget.BLANK:
+      d = "_blank";
+      break;
+    case LinkTarget.PARENT:
+      d = "_parent";
+      break;
+    case LinkTarget.TOP:
+      d = "_top";
+  }
+  a.target = d;
+  a.rel = "string" === typeof c ? c : DEFAULT_LINK_REL;
+}
+var PDFLinkService = PDFLinkService || class {
+  constructor() {
+    this.pdfDocument = this.baseUrl = null;
+  }
+  setDocument(a, b = null) {
+    this.baseUrl = b;
+    this.pdfDocument = a;
+    this._pagesRefCache = Object.create(null);
+  }
+  get pagesCount() {
+    return this.pdfDocument ? this.pdfDocument.numPages : 0;
+  }
+  addLinkAttributes(a, b, f = !1) {
+    addLinkAttributes(a, {url:b, target:f ? LinkTarget.BLANK : this.externalLinkTarget, rel:this.externalLinkRel, enabled:this.externalLinkEnabled});
+  }
+  _goToDestinationHelper(a, b = null, f) {
+    const c = f[0];
+    let d;
+    if ("object" === typeof c && null !== c) {
+      if (d = this._cachedPageNumber(c), null === d) {
+        this.pdfDocument.getPageIndex(c).then(g => {
+          this.cachePageRef(g + 1, c);
+          this._goToDestinationHelper(a, b, f);
+        }).catch(() => {
+          console.error(`PDFLinkService._goToDestinationHelper: "${c}" is not ` + `a valid page reference, for dest="${a}".`);
+        });
+        return;
+      }
+    } else {
+      if (Number.isInteger(c)) {
+        d = c + 1;
+      } else {
+        console.error(`PDFLinkService._goToDestinationHelper: "${c}" is not ` + `a valid destination reference, for dest="${a}".`);
+        return;
+      }
+    }
+    !d || 1 > d || d > this.pagesCount ? console.error(`PDFLinkService._goToDestinationHelper: "${d}" is not ` + `a valid page number, for dest="${a}".`) : PDFView.showpage(d);
+  }
+  async goToDestination(a) {
+    if (this.pdfDocument) {
+      if ("string" === typeof a) {
+        var b = a;
+        var f = await this.pdfDocument.getDestination(a);
+      } else {
+        b = null, f = await a;
+      }
+      Array.isArray(f) ? this._goToDestinationHelper(a, b, f) : console.error(`PDFLinkService.goToDestination: "${f}" is not ` + `a valid destination array, for dest="${a}".`);
+    }
+  }
+  navigateTo(a) {
+    var b = this, f = function(c) {
+      var d = c instanceof Object ? b._pagesRefCache[c.num + " " + c.gen + " R"] : c + 1;
+      d ? (d > b.pagesCount && (d = b.pagesCount), PDFView.showpage(d)) : b.pdfDocument.getPageIndex(c).then(function(g) {
+        b._pagesRefCache[c.num + " " + c.gen + " R"] = g + 1;
+        f(c);
+      });
+    };
+    ("string" === typeof a ? this.pdfDocument.getDestination(a) : Promise.resolve(a)).then(function(c) {
+      a = c;
+      c instanceof Array && f(c[0]);
+    });
+  }
+  getDestinationHash(a) {
+    if ("string" === typeof a) {
+      if (0 < a.length) {
+        return this.getAnchorUrl("#" + escape(a));
+      }
+    } else {
+      if (Array.isArray(a) && (a = JSON.stringify(a), 0 < a.length)) {
+        return this.getAnchorUrl("#" + escape(a));
+      }
+    }
+    return this.getAnchorUrl("");
+  }
+  getAnchorUrl(a) {
+    return (this.baseUrl || "") + a;
+  }
+  cachePageRef(a, b) {
+    b && (this._pagesRefCache[0 === b.gen ? `${b.num}R` : `${b.num}R${b.gen}`] = a);
+  }
+  _cachedPageNumber(a) {
+    a = 0 === a.gen ? `${a.num}R` : `${a.num}R${a.gen}`;
+    let b;
+    return (null == (b = this._pagesRefCache) ? void 0 : b[a]) || null;
+  }
+};
+

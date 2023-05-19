@@ -1,0 +1,139 @@
+﻿
+	<div id="glance_agentviewing" class="glance_hide" tabindex="0" aria-live="polite" role="alert"></div>
+	<div id="glance_cobrowse_btn" class="glance_accessible glance_norc" aria-label="${button-expand-aria-label}" role="region">
+
+		<template id="glance_videopreviewwidget">
+			<div class="glance_vvc_preview">
+				<div id="glance_vvc_cameramessage">${vvc-waitingforcamera}</div>
+				<video autoplay playsinline muted></video>
+				<!-- Hide video controls initially.  They will be displayed once preview starts -->
+				<div class="glance_vid-gradation glance_hide"></div>
+				<button type="button" id='glance_camera-blur' class="glance_tooltip glance_hide" data-title="${widget-toggle-blurbgd-tooltip}" aria-label='${widget-toggle-blurbgd-tooltip}'></button>
+				<button type="button" id='glance_camera-on-off' class="glance_tooltip glance_hide" data-title="${widget-toggle-camera-tooltip}" aria-label='${widget-toggle-camera-tooltip}'></button>
+				<glance-custom-select class="glance_tooltip glance_hide" id="glance_selectvideosource" data-title="${widget-camera-select-tooltip}" aria-label='${widget-camera-select-tooltip}' tabindex="-1"></glance-custom-select>
+				<div id="glance_vvc_overlaymessage"></div>
+			</div>
+		</template>
+
+		<template id="glance_videoviewertemplate">
+			<div id="glance_video_container_n" class="glance-video-container" data-agentinteractive="local">
+				<iframe frameBorder="0" id='glance_video_n' class="glance-video-iframe" data-independent-content='1' title="${video-viewer-title}"></iframe>
+				<div class="glance_part-name_wrapper">
+					<div class="glance-participant-name"></div>
+				</div>
+				<div class="glance_videocontrol_wrapper">
+					<button type="button" class="glance_tooltip glance_ejectguestbutton" aria-label="${widget-eject-guest-tooltip}" data-title="${widget-eject-guest-tooltip}"></button>
+					<button type="button" class="glance_tooltip glance_pausevideobutton" aria-label="${widget-pause-remote-video-tooltip}" data-title="${widget-pause-remote-video-tooltip}"></button>
+				</div>
+				<div class="glance_pausedvideo"></div>
+			</div>
+		</template>
+
+		<div id='glance_terms' role="alertdialog" aria-labelledby='glance_terms_title' aria-describedby='glance_terms_text' class='glance_hide glance_ui'>
+			<div class="glance_leftpanel">
+				<glance-video-preview data-onoffbutton="visible" data-blurbutton="visible"></glance-video-preview>
+			</div>
+			<div class="glance_rightpanel">
+				<span class='data'></span>
+				<h2 id='glance_terms_title'>${terms-heading}</h2><p id='glance_terms_text'>${terms-prompt}</p>
+				<button type="button" id='glance_accept'>${button-accept}</button>
+				<button type="button" id='glance_decline' class='secondary_btn'>${button-decline}</button><br />
+				<a href='' id='glance_terms_link'>${terms-link}</a>
+				<div class="glance_poweredby">${powered-by-text}</div>
+			</div>
+		</div>
+
+		<div id="glance_visitorvideoconfirm" class="glance_hide glance_ui" role="dialog" tabindex='-1' aria-labelledby="glance_vvc_title" aria-describedby="glance_vvc_description">
+			<div class="glance_leftpanel">
+				<glance-video-preview data-onoffbutton="hidden"  data-blurbutton="visible"></glance-video-preview>
+			</div>
+			<div class="glance_rightpanel">
+				<h2>${vvc-title}</h2>
+				<p>${vvc-description}</p>
+				<div class="glance_cta-buttons">
+					<button type="button" id="glance_vvc_accept">${button-yes}</button>
+					<button type="button" class="secondary_btn" id="glance_vvc_decline">${button-no}</button>
+					<div class="glance_poweredby">${powered-by-text}</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="glance_agent_confirm_dialog" data-agentinteractive="local" aria-labelledby="glance_confirm_msg" class="glance_hide <!--glance_ui--> glance_popupmsg" role="alertdialog" aria-modal="true" tabindex="-1">
+			<p id="glance_confirm_pausevideo" class="agent_confirmation_message glance_hide"> ${agent-pausevideo-confirm} </p>
+			<p id="glance_confirm_ejectuser" class="agent_confirmation_message glance_hide">  ${agent-eject-confirm} </p>
+			<p id="glance_confirm_viewerleave" class="agent_confirmation_message glance_hide">  ${viewer-leave-confirm} </p>
+			<p id="glance_confirm_endsession" class="agent_confirmation_message glance_hide">  ${end-session-prompt} </p>
+			<button id="glance_confirm_btn" data-agentinteractive="local">${button-yes}</button>
+			<button id="glance_deny_btn" data-agentinteractive="local" class="secondary_btn">${button-no}</button>
+		</div>
+
+		<div id='glance_ssnkey_box' role="alertdialog" class='glance_hide glance_ui glance_modal_ssnkey_box' aria-label="${button-expand-aria-label}">
+			<div class="glance_leftpanel">
+				<glance-video-preview data-onoffbutton="visible" data-blurbutton="visible"></glance-video-preview>
+			</div>
+			<div class="glance_rightpanel"  aria-live='polite'>
+				<div class="glance_spinner">
+					<div class="glance_bounce1"></div>
+					<div class="glance_bounce2"></div>
+					<div class="glance_bounce3"></div>
+				</div>
+				<div id='glance_ssn_starting'>
+					<h2>${button-session-starting-text}...</h2>
+				</div>
+				<div id='glance_keyless_prompt'>
+					<h2>${button-integrated-sess-start-prompt}...</h2>
+				</div>
+				<div id='glance_camera_prompt'>
+					<h2>${camera-prompt}</h2>
+				</div>
+                <h2 id='glance_key_prompt'></h2>
+				<div id='glance_ssn_key'></div>
+				<div>
+					<button id="glance_cancel_btn" type="button" class="secondary_btn" data-title="${button-leave-session}" aria-label="${button-leave-session}">${button-end-session}</button>
+				</div>
+				<div class="glance_poweredby">${powered-by-text}</div>
+			</div>
+		</div>
+		<div id="glance_sessionwaiting_scrim" tabindex="-1" class="glance_dim"></div>
+
+		<div id='glance_ssview' class='glance_hide'>
+			<iframe scrolling='no' id='glance_screenshare' title="${screenshare-viewer-title}" data-independent-content='1'></iframe>
+			<video id='glance_screensharepreview' muted></video>
+		</div>
+		<video id='glance_visitor_screensharepreview' muted class='glance_hide'></video>
+
+		<div id='glance_session_widget' aria-label="${widget-aria-label}" role="dialog" aria-labelledby="glance_showing_status">
+			<div id="glance_titlebar" class="glance-logo-as-child">
+				<div id="glance_corp_logo" aria-label="${companyname}"></div>
+				<h2 id="glance_showing_status">${widget-showing-text}</h2>
+				<p id="glance_discon_status">${widget-reconnecting-text}<span class="glance_ellipsis_anim"><span>.</span><span>.</span><span>.</span></span></p>
+				<button type="button" id='glance_expand' class='glance_closed' data-agentinteractive="remote" aria-label="${button-expand-aria-label}" aria-expanded='true'></button>
+			</div>
+			<button type="button" data-agentinteractive="local" id='glance_stop_btn' class="glance_tooltip firstcontrol" data-title="${button-leave-session}" aria-label="${button-leave-session}"></button>
+
+			<div id="glance_videopreviewcontainer">
+				<div class="glance_videopreview_wrapper">
+					<video id='glance_videopreview' muted></video>
+					<div class="glance_pausedvideo"></div>
+				</div>
+
+				<div id="glance_widget_controls">
+					<div class="glance_widget_controls_btns">
+						<button type="button" id="glance_stop_video" data-agentinteractive="local" class="glance_tooltip" data-title="${widget-toggle-camera-tooltip}" aria-label="${widget-toggle-camera-tooltip}"></button>
+						<button type="button" id="glance_blurbgd_video" data-agentinteractive="local" class="glance_tooltip" data-title="${widget-toggle-blurbgd-tooltip}" aria-label="${widget-toggle-blurbgd-tooltip}"></button>
+						<button type="button" id="glance_resize_video" class="glance_tooltip lastcontrol" data-title="${widget-resize-video-tooltip}" data-agentinteractive="remote" aria-label="${widget-aria-expandvideo}" aria-expanded="false"></button>
+					</div>
+					<div class="glance_poweredby">${powered-by-text}</div>
+				</div>
+			</div>
+			<div id="glance_video_containers" data-independentscroll="true" data-agentinteractive="local" data-smallvideoscroll="left" role="region" aria-label="${widget-aria-videos-label}">
+				<div id="scroll-controls" class="glance-smallvideos-scroll">
+					<button type="button" aria-label="scroll left" id="glance_scroll-left"></button>
+					<button type="button" aria-label="scroll right" id="glance_scroll-right"></button>
+				</div>
+			</div>
+			<div id="glance_tagline" class="glance_poweredby">${powered-by-text}</div>
+		</div>
+		<div id='glance_border'></div>
+		<div id="glance_accessibility_status" aria-label=""><p role="status" aria-live="assertive"></p></div>
+	</div>

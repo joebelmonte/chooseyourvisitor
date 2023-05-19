@@ -168,7 +168,7 @@ function addCobrowseScript() {
   }
   if (document.getElementById("self-hosted").value != "") {
     var version = document.getElementById("self-hosted").value;
-    src = `./self-hosted-scripts/cobrowse_${version}/cobrowse/js/GlanceCobrowseLoader_${version}M.js`;
+    src = `./self-hosted-scripts/version_${version}/cobrowse/js/GlanceCobrowseLoader_${version}M.js`;
   } else {
     src = `https://${domain}/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`;
   }
