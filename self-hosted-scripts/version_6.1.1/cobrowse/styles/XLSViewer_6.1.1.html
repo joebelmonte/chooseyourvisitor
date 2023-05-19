@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google" content="notranslate">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>SpreadSheet viewer</title>
+
+    <link id="viewer-css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="xls-controlpanel">
+
+        <div id="page-nav">
+            <div id="doctitle" class="doc-title"></div>
+            <div id="pagetitle"><!--Page:--></div>
+
+            <button id="prevtab" class="firstcontrol">
+                <span style="pointer-events: none" id="symbol" class="symbol large">←</span>
+            </button>
+
+            <div>
+                <span class="pagetotal">Sheet</span>
+            </div>
+
+            <div>
+                <span id="pageselect" class="pagetotal" tabindex="0" aria-labelledby="lbl_pagenumber"></span>
+            </div>
+
+            <div>
+                <span class="pagetotal">of&nbsp;<span id="tabtotal"></span></span>
+            </div>
+
+            <button id="nextTab">
+                <span style="pointer-events: none" id="symbol" class="symbol large">→</span>
+            </button>
+
+        </div>
+
+        <div id="tabnamewrapper" style="margin-top: 15px;">
+            <span id="tabname"> </span>
+        </div>
+
+        <div class="top-right">
+            <a id="glance_dl" download title="download file" tabindex="0" role="button" aria-labelledby="lbl_openfile" style="display:none"></a>
+            <a id="xlslink" download title="download file" tabindex="0" role="button" aria-labelledby="lbl_openfile"></a>
+            <a id="closedoc" title="Close" class="lastcontrol" tabindex="0" role="button" aria-labelledby="lbl_close"></a>
+        </div>
+    </div>
+
+    <div id="message"></div>
+
+    <div id="xls-loading" class="spinner flowinline">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+
+    <div id="xls-toobig">The selected file exceeds the size limit (5MB)</div>
+
+    <div id="the-page"></div>
+
+</body>
+
+</html>
