@@ -8,6 +8,11 @@ Dev version deployed here: [Choose Your Visitor Dev](https://www.glancedev1.com/
 
 ## Release Notes
 
+### July 3, 2023
+
+- Removed styling for restricted editing elements from the visitor side
+  - This styling is now handled on the agent side only, and only when restriced editing mode is enabled
+
 ### May 19, 2023
 
 - Refactored code related to self-hosted script versions. Added back several versions as options.

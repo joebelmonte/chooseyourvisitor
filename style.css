@@ -361,10 +361,6 @@ input#allowed-roles {
   margin-top: 20px;
 }
 
-[data-gid] .glance_controllable {
-  border: 2px solid red;
-}
-
 .loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
