@@ -158,6 +158,12 @@ function addCobrowseScript() {
   if (presenceSetting != "off") {
     theCobrowseScript.setAttribute("data-presence", `${presenceSetting}`);
   }
+  if (document.querySelector("#additionalGroupIds").value) {
+    theCobrowseScript.setAttribute(
+      "data-additionalgroupids",
+      document.querySelector("#additionalGroupIds").value
+    );
+  }
   theCobrowseScript.setAttribute("data-site", `${environment}`);
   theCobrowseScript.setAttribute("charset", "UTF-8");
   theCobrowseScript.setAttribute("data-visitorid", visitorId);
@@ -191,6 +197,8 @@ function showLoader() {
     document.getElementById("visitorId").value;
   document.getElementById("group-id").innerHTML =
     document.getElementById("groupId").value;
+  document.getElementById("additional-group-ids").innerHTML =
+    document.getElementById("additionalGroupIds").value;
   document.getElementById("video-setting").innerHTML =
     document.getElementById("video-at-start").value;
   document.getElementById("presence-user-setting").innerHTML =
@@ -206,6 +214,32 @@ function checkPausedState() {
     document.querySelector("#pause-session-button").innerText =
       "Unpause Session";
     document.getElementById("paused-message").style.display = "block";
+  }
+}
+
+function createAdditionalGroupStartButtons() {
+  const additionalGroupIds = document
+    .querySelector("#additionalGroupIds")
+    .value.split(",");
+  if (additionalGroupIds != "") {
+    additionalGroupIds.forEach((groupId) => {
+      document
+        .querySelector("#additional-group-start-buttons")
+        .insertAdjacentHTML(
+          "beforeend",
+          `<button id="start-session-${groupId}" data-additional-group="${groupId}">
+      Start Session with Group ${groupId}
+    </button>`
+        );
+      document
+        .querySelector(`#start-session-${groupId}`)
+        .addEventListener("click", (e) => {
+          GLANCE.Cobrowse.Visitor.startSession({
+            groupid: `${groupId}`,
+            sessionKey: "GLANCE_KEYTYPE_RANDOM",
+          });
+        });
+    });
   }
 }
 
@@ -235,6 +269,11 @@ function submitClicked() {
     "selfhost",
     document.getElementById("self-hosted").value
   );
+  url.searchParams.set(
+    "additionalGroupIds",
+    encodeURIComponent(document.querySelector("#additionalGroupIds").value)
+  );
+  createAdditionalGroupStartButtons();
   document.querySelector("#auto-load-post-load").checked =
     document.querySelector("#auto-load").checked;
   window.history.pushState({}, "", url);
@@ -282,6 +321,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const autoLoad = urlParams.get("autoload");
   const presence = urlParams.get("presence");
   const selfHost = urlParams.get("selfhost");
+  const additionalGroupIds = urlParams.get("additionalGroupIds");
   if (presence) {
     document.getElementById("presence-setting").value = presence;
   }
@@ -322,6 +362,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
   if (selfHost) {
     document.querySelector("#self-hosted").value = selfHost;
+  }
+  if (additionalGroupIds) {
+    document.querySelector("#additionalGroupIds").value =
+      decodeURIComponent(additionalGroupIds);
   }
   if (autoLoad == "true") {
     document.querySelector("#auto-load").checked = true;

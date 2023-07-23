@@ -81,6 +81,16 @@
               <input type="text" id="groupId" name="groupId" value="20541" />
             </div>
             <div class="user-input-field">
+              <p>Additional Group IDs (comma delimited):</p>
+              <input
+                type="text"
+                id="additionalGroupIds"
+                name="additionalGroupIds"
+                value=""
+                placeholder="optional"
+              />
+            </div>
+            <div class="user-input-field">
               Presence:
               <select id="presence-setting">
                 <option value="on">On</option>
@@ -152,6 +162,7 @@
             </button>
           </p>
           <p>Group ID: <span id="group-id"></span></p>
+          <p>Additional Group IDs: <span id="additional-group-ids"></span></p>
           <p>Presence: <span id="presence-user-setting"></span></p>
           <p>Data-Site: <span id="environment-chosen"></span></p>
           <p>Website: <span id="using-website">glance.net</span></p>
@@ -343,6 +354,7 @@
               Start Session with Small Video
             </button>
           </div>
+          <div id="additional-group-start-buttons"></div>
         </div>
       </aside>
     </section>

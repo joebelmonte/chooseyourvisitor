@@ -8,6 +8,10 @@ Dev version deployed here: [Choose Your Visitor Dev](https://www.glancedev1.com/
 
 ## Release Notes
 
+### July 23, 2023
+
+- Added support for specifying additional group IDs in the script tag
+
 ### July 3, 2023
 
 - Removed styling for restricted editing elements from the visitor side
