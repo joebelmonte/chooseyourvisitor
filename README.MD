@@ -8,6 +8,10 @@ Dev version deployed here: [Choose Your Visitor Dev](https://www.glancedev1.com/
 
 ## Release Notes
 
+### September 9, 2023
+
+- The session key automatically gets copied to the clipboard on session start
+
 ### July 23, 2023
 
 - Added support for specifying additional group IDs in the script tag
