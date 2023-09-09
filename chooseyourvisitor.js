@@ -19,6 +19,12 @@ function sessionStarted() {
     document.querySelector("#pause-session-button").innerText = "Pause Session";
     GLANCE.Cobrowse.Visitor.pauseSession({ pause: false });
   }
+  // Automatically copy the session key to the clipboard
+  var sessionKey = GLANCE.Cobrowse.Visitor.getKey();
+  navigator.clipboard
+    .writeText(sessionKey)
+    .then((e) => console.log("Session key copied: ", sessionKey))
+    .catch((e) => console.log("Error copying session key: ", e));
 }
 
 function sessionContinued() {
