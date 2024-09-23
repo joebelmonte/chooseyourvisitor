@@ -8,6 +8,10 @@ Dev version deployed here: [Choose Your Visitor Dev](https://www.glancedev1.com/
 
 ## Release Notes
 
+### September 23, 2024
+
+- Added session metrics as optional parameter for script tag.
+
 ### September 9, 2023
 
 - The session key automatically gets copied to the clipboard on session start
