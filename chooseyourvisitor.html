@@ -133,6 +133,15 @@
             <div class="user-input-field">
               <input
                 type="checkbox"
+                id="session-metrics"
+                name="session-metrics"
+                value="session-metrics"
+              />
+              <label for="session-metrics">Collect session metrics?</label>
+            </div>
+            <div class="user-input-field">
+              <input
+                type="checkbox"
                 id="auto-load"
                 name="auto-load"
                 value="auto-load"
@@ -170,9 +179,8 @@
           <p>Presence: <span id="presence-user-setting"></span></p>
           <p>Data-Site: <span id="environment-chosen"></span></p>
           <p>Website: <span id="using-website">glance.net</span></p>
-          <p>
-            Video at session start: <span id="video-setting">glance.net</span>
-          </p>
+          <p>Video at session start: <span id="video-setting"></span></p>
+          <p>Session Metrics: <span id="session-metrics-settings"></span></p>
           <div class="user-input-field">
             <input
               type="checkbox"

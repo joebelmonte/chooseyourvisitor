@@ -158,6 +158,7 @@ function addCobrowseScript() {
   var environment = document.getElementById("environment").value;
   var presenceSetting = document.getElementById("presence-setting").value;
   var video = document.getElementById("video-at-start").value;
+  var sessionMetrics = document.getElementById("session-metrics").checked;
   theCobrowseScript.setAttribute("id", "glance-cobrowse");
   theCobrowseScript.setAttribute("type", "text/javascript");
   theCobrowseScript.setAttribute("data-groupid", groupId);
@@ -177,6 +178,9 @@ function addCobrowseScript() {
   theCobrowseScript.setAttribute("data-startpaused", `${paused}`);
   if (video != "default") {
     theCobrowseScript.setAttribute("data-video", `${video}`);
+  }
+  if (sessionMetrics) {
+    theCobrowseScript.setAttribute("data-collection", "on");
   }
   if (document.getElementById("self-hosted").value != "") {
     var version = document.getElementById("self-hosted").value;
@@ -207,6 +211,8 @@ function showLoader() {
     document.getElementById("additionalGroupIds").value;
   document.getElementById("video-setting").innerHTML =
     document.getElementById("video-at-start").value;
+  document.getElementById("session-metrics-settings").innerHTML =
+    document.getElementById("session-metrics").checked ? "On" : "Off";
   document.getElementById("presence-user-setting").innerHTML =
     document.getElementById("presence-setting").value;
   document.querySelector("#environment-chosen").innerText =
@@ -268,6 +274,10 @@ function submitClicked() {
     document.querySelector("#video-at-start").value
   );
   url.searchParams.set(
+    "sessionmetrics",
+    document.getElementById("session-metrics").checked
+  );
+  url.searchParams.set(
     "autoload",
     document.querySelector("#auto-load").checked
   );
@@ -324,6 +334,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const visitorId = urlParams.get("visitorId");
   const website = urlParams.get("website");
   const video = urlParams.get("video");
+  const sessionMetrics = urlParams.get("sessionmetrics");
   const autoLoad = urlParams.get("autoload");
   const presence = urlParams.get("presence");
   const selfHost = urlParams.get("selfhost");
@@ -372,6 +383,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
   if (additionalGroupIds) {
     document.querySelector("#additionalGroupIds").value =
       decodeURIComponent(additionalGroupIds);
+  }
+  if (sessionMetrics == "true") {
+    document.getElementById("session-metrics").checked = true;
   }
   if (autoLoad == "true") {
     document.querySelector("#auto-load").checked = true;
