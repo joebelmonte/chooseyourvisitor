@@ -220,6 +220,12 @@ function pauseSession() {
 window.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
 
+  // Reset link
+
+  document.getElementById("reset").addEventListener("click", () => {
+    document.location = document.location.pathname;
+  });
+
   // Automatically fill in the cdn value based on the website
 
   var defineCdn = function () {

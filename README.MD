@@ -8,6 +8,11 @@ Dev version deployed here: [Choose Your Visitor Dev](https://www.glancedev1.com/
 
 ## Release Notes
 
+### November 5, 2024
+
+- Added support for arbitrary website and cdn values
+- Added `Reset` link which will re-load the page w/o any querystring parameters
+
 ### September 23, 2024
 
 - Added session metrics as optional parameter for script tag.
