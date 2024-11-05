@@ -284,7 +284,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   if (environment) {
     document.getElementById("environment").value = environment;
   }
-  if (visitorId) {
+  if (visitorId != null) {
     document.getElementById("visitorId").value = visitorId;
   }
   if (website) {
