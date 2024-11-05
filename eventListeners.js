@@ -27,6 +27,16 @@ function sessionStarted() {
     .catch((e) => console.log("Error copying session key: ", e));
 }
 
+function checkPausedState() {
+  var urlParams = new URLSearchParams(window.location.search);
+
+  if (urlParams.get("paused") == "true") {
+    document.querySelector("#pause-session-button").innerText =
+      "Unpause Session";
+    document.getElementById("paused-message").style.display = "block";
+  }
+}
+
 function sessionContinued() {
   console.log("GLANCE SESSION LISTENER: sessioncontinue has fired");
   if (typeof GLANCE.Cobrowse.Visitor.pauseSession == "function") {

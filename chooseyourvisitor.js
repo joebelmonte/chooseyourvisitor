@@ -112,16 +112,6 @@ function showLoader() {
     document.getElementById("environment").value;
 }
 
-function checkPausedState() {
-  var urlParams = new URLSearchParams(window.location.search);
-
-  if (urlParams.get("paused") == "true") {
-    document.querySelector("#pause-session-button").innerText =
-      "Unpause Session";
-    document.getElementById("paused-message").style.display = "block";
-  }
-}
-
 function createAdditionalGroupStartButtons() {
   const additionalGroupIds = document
     .querySelector("#additionalGroupIds")
