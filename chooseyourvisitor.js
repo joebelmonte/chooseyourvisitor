@@ -1,154 +1,47 @@
-// Session event listeners
-
-function sessionstarting() {
-  console.log("GLANCE SESSION LISTENER: sessionstarting has fired");
-}
-
-function sessionStarted() {
-  console.log("GLANCE SESSION LISTENER: sessionstart has fired");
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("status-message").innerHTML = "";
-  if (GLANCE.Cobrowse.Visitor.pauseSession) {
-    // Putting this in an if statement to make it backwards compatible with older versions of CB
-    // Sessions should never start in a paused state.
-    // However, I was noticing that if the previous session had started in a paused state,
-    // then starting another session w/o refreshing the page would start it as paused, even if
-    // The script tag attribute had been switched to 2
-    document.getElementById("pause-session-button").disabled = false;
-    document.getElementById("pause-session-button").setAttribute("title", "");
-    document.querySelector("#pause-session-button").innerText = "Pause Session";
-    GLANCE.Cobrowse.Visitor.pauseSession({ pause: false });
-  }
-  // Automatically copy the session key to the clipboard
-  var sessionKey = GLANCE.Cobrowse.Visitor.getKey();
-  navigator.clipboard
-    .writeText(sessionKey)
-    .then((e) => console.log("Session key copied: ", sessionKey))
-    .catch((e) => console.log("Error copying session key: ", e));
-}
-
-function sessionContinued() {
-  console.log("GLANCE SESSION LISTENER: sessioncontinue has fired");
-  if (typeof GLANCE.Cobrowse.Visitor.pauseSession == "function") {
-    document.getElementById("pause-session-button").disabled = false;
-    document.getElementById("pause-session-button").setAttribute("title", "");
-    checkPausedState();
-  }
-}
-
-function sessionEnded() {
-  console.log("GLANCE SESSION LISTENER: sessionend has fired");
-  document.getElementById("loader").style.display = "block";
-  console.log("the session has ended");
-  document.getElementById("pause-session-button").disabled = true;
-  document
-    .getElementById("pause-session-button")
-    .setAttribute("title", "Only available during sessions running CB v 5.1+.");
-  const url = new URL(window.location);
-  url.searchParams.set("paused", "false");
-  window.history.pushState({}, "", url);
-  document.getElementById("glance-cobrowse").dataset.startpaused = 2;
-  document.querySelector("#pause-session-button").innerText = "Pause Session";
-}
-
-function screenshare(e) {
-  console.log(`GLANCE SESSION LISTENER: screenshare has fired: `, e);
-}
-
-function agents(e) {
-  console.log(`GLANCE SESSION LISTENER: agents has fired: `, e);
-}
-
-function rcevent(e) {
-  console.log("GLANCE SESSION LISTENER: rcevent has fired: ", e);
-  console.log(
-    "The element that was touched was: ",
-    document.querySelector(e.path)
-  );
-  if (document.querySelector(e.path).value) {
-    console.log("The value is ", document.querySelector(e.path).value);
-  }
-}
-
-function rc(e) {
-  var status = e.enabled === true ? "started" : "ended";
-  console.log(`GLANCE SESSION LISTENER: Selective Editing has ${status}.`, e);
-}
-
-function rcrequested(callback) {
-  console.log("GLANCE SESSION LISTENER: Selective Editing has been requested.");
-  callback.accept = function () {
-    console.log("Selective editing accepted.");
-    GLANCE.Cobrowse.Visitor.enableRC(true);
-  };
-  callback.decline = function () {
-    console.log("Selective editing declined.");
-    GLANCE.Cobrowse.Visitor.enableRC(false);
-  };
-}
-
-function glanceSessionEventListeners() {
-  GLANCE.Cobrowse.Visitor.addEventListener("sessionstarting", sessionstarting);
-  GLANCE.Cobrowse.Visitor.addEventListener("sessionstart", sessionStarted);
-  GLANCE.Cobrowse.Visitor.addEventListener("sessioncontinue", sessionContinued);
-  GLANCE.Cobrowse.Visitor.addEventListener("sessionend", sessionEnded);
-  GLANCE.Cobrowse.Visitor.addEventListener("screenshare", screenshare);
-  GLANCE.Cobrowse.Visitor.addEventListener("agents", agents);
-  GLANCE.Cobrowse.Visitor.addEventListener("rcevent", rcevent);
-  GLANCE.Cobrowse.Visitor.addEventListener("rc", rc);
-  GLANCE.Cobrowse.Visitor.addEventListener("rcrequested", rcrequested);
-}
+import { glanceSessionEventListeners } from "./eventListeners.js";
 
 function addCobrowseScript() {
-  var websocket = "www.glance.net";
-  var domain = "www.glancecdn.net";
   var src = "";
 
   const urlParams = new URLSearchParams(window.location.search);
   const paused = urlParams.get("paused") === "true" ? 1 : 2;
 
-  const websiteSelection = document.querySelector("#website").value;
+  const websocket = document.querySelector("#website").value
+    ? document.querySelector("#website").value
+    : "www.glance.net";
 
-  switch (websiteSelection) {
-    case "beta":
-      websocket = "beta.glance.net";
-      domain = "beta.glancecdn.net";
+  document.querySelector("#using-website").innerText = websocket;
+
+  const cdn = document.querySelector("#cdn").value
+    ? document.querySelector("#cdn").value
+    : "www.glancecdn.net";
+
+  document.querySelector("#using-cdn").innerText = cdn;
+
+  switch (websocket) {
+    case "www.glance.net":
+      document.querySelector("header").style.background = "#B3C5CE";
+      break;
+    case "beta.glance.net":
       document.querySelector("header").style.background = "#BF40BF";
-      document.querySelector("#using-website").innerText = "beta.glance.net";
       break;
-    case "myglance":
-      websocket = "www.myglance.net";
-      domain = "cdn.myglance.net";
+    case "www.myglance.net":
       document.querySelector("header").style.background = "#e74c3c";
-      document.querySelector("#using-website").innerText = "myglance.net";
       break;
-    case "dw1":
-      websocket = "dw1.myglance.org";
-      domain = "cdn1.myglance.org";
+    case "dw1.myglance.org":
       document.querySelector("header").style.background = "#a4fba6";
-      document.querySelector("#using-website").innerText = "dw1.myglance.org";
       break;
-    case "dw2":
-      websocket = "dw2.myglance.org";
-      domain = "cdn2.myglance.org";
+    case "dw2.myglance.org":
       document.querySelector("header").style.background = "#4ae54a";
-      document.querySelector("#using-website").innerText = "dw2.myglance.org";
       break;
-    case "dw3":
-      websocket = "dw3.myglance.org";
-      domain = "cdn3.myglance.org";
+    case "dw3.myglance.org":
       document.querySelector("header").style.background = "#30cb00";
-      document.querySelector("#using-website").innerText = "dw3.myglance.org";
       break;
-    case "dw4":
-      websocket = "dw4.myglance.org";
-      domain = "cdn4.myglance.org";
+    case "dw4.myglance.org":
       document.querySelector("header").style.background = "#0f9200";
-      document.querySelector("#using-website").innerText = "dw4.myglance.org";
       break;
     default:
-      var websocket = "www.glance.net";
-      var domain = "www.glancecdn.net";
+      document.querySelector("header").style.background = "#D1343E";
       break;
   }
 
@@ -186,7 +79,7 @@ function addCobrowseScript() {
     var version = document.getElementById("self-hosted").value;
     src = `./self-hosted-scripts/version_${version}/cobrowse/js/GlanceCobrowseLoader_${version}M.js`;
   } else {
-    src = `https://${domain}/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`;
+    src = `https://${cdn}/cobrowse/CobrowseJS.ashx?group=${groupId}&site=${environment}`;
   }
   theCobrowseScript.setAttribute("src", src);
   document.head.append(theCobrowseScript);
@@ -269,6 +162,7 @@ function submitClicked() {
   );
   url.searchParams.set("visitorId", document.getElementById("visitorId").value);
   url.searchParams.set("website", document.querySelector("#website").value);
+  url.searchParams.set("cdn", document.querySelector("#cdn").value);
   url.searchParams.set(
     "video",
     document.querySelector("#video-at-start").value
@@ -325,6 +219,47 @@ function pauseSession() {
 
 window.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
+
+  // Reset link
+
+  document.getElementById("reset").addEventListener("click", () => {
+    document.location = document.location.pathname;
+  });
+
+  // Automatically fill in the cdn value based on the website
+
+  var defineCdn = function () {
+    var websiteSelection = document.getElementById("website").value;
+    switch (websiteSelection) {
+      case "www.glance.net":
+        document.getElementById("cdn").value = "www.glancecdn.net";
+        break;
+      case "beta.glance.net":
+        document.getElementById("cdn").value = "beta.glancecdn.net";
+        break;
+      case "www.myglance.net":
+        document.getElementById("cdn").value = "cdn.myglance.net";
+        break;
+      case "dw1.myglance.org":
+        document.getElementById("cdn").value = "cdn1.myglance.org";
+        break;
+      case "dw2.myglance.org":
+        document.getElementById("cdn").value = "cdn2.myglance.org";
+        break;
+      case "dw3.myglance.org":
+        document.getElementById("cdn").value = "cdn3.myglance.org";
+        break;
+      case "dw4.myglance.org":
+        document.getElementById("cdn").value = "cdn4.myglance.org";
+        break;
+      default:
+        document.getElementById("cdn").value = "";
+        break;
+    }
+  };
+
+  document.getElementById("website").addEventListener("change", defineCdn);
+
   document
     .getElementById("visitor-id-button")
     .addEventListener("click", submitClicked);
@@ -333,6 +268,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const environment = urlParams.get("environment");
   const visitorId = urlParams.get("visitorId");
   const website = urlParams.get("website");
+  const cdn = urlParams.get("cdn");
   const video = urlParams.get("video");
   const sessionMetrics = urlParams.get("sessionmetrics");
   const autoLoad = urlParams.get("autoload");
@@ -351,28 +287,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
   if (visitorId) {
     document.getElementById("visitorId").value = visitorId;
   }
-  switch (website) {
-    case "beta":
-      document.querySelector("#website").value = "beta";
-      break;
-    case "myglance":
-      document.querySelector("#website").value = "myglance";
-      break;
-    case "dw1":
-      document.querySelector("#website").value = "dw1";
-      break;
-    case "dw2":
-      document.querySelector("#website").value = "dw2";
-      break;
-    case "dw3":
-      document.querySelector("#website").value = "dw3";
-      break;
-    case "dw4":
-      document.querySelector("#website").value = "dw4";
-      break;
-    default:
-      document.querySelector("#website").value = "glance";
-      break;
+  if (website) {
+    document.getElementById("website").value = website;
+  }
+  if (cdn) {
+    document.getElementById("cdn").value = cdn;
   }
   if (video) {
     document.querySelector("#video-at-start").value = video;
