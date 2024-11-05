@@ -13,7 +13,21 @@
     />
     <!-- <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self' 'wasm-unsafe-eval' 'unsafe-inline' blob: https://*.glancecdn.net  wss://*.glance.net https://*.glance.net"
+      content="default-src 'self';
+      script-src 'self' https://cdn-bofa.myglance.net https://cdnstorage.myglance.net 'wasm-unsafe-eval';
+      connect-src https://www-bofa.myglance.net
+        https://bofa-staging-presence-1.myglance.net wss://bofa-staging-presence-1.myglance.net
+        https://cdn-bofa.myglance.net https://cdnstorage.myglance.net
+        https://cobrowse-bofa-location.myglance.net
+        https://bofa-staging-session-a-1.myglance.net wss://bofa-staging-session-a-1.myglance.net 
+        wss://visitor-cam-bofa.myglance.net
+        https://bofa-staging-video-a-1.myglance.net 
+        wss://bofa-staging-video-a-1.myglance.net;
+      style-src-elem 'self' https://cdn-bofa.myglance.net https://cdnstorage.myglance.net;
+      font-src 'self' https://cdnstorage.myglance.net;
+      img-src 'self' https://cdnstorage.myglance.net;
+      worker-src blob:;
+      frame-src https://www-bofa.myglance.net"
     /> -->
     <link rel="stylesheet" href="style.css" />
     <script src="chooseyourvisitor.js"></script>
@@ -110,16 +124,32 @@
               </select>
             </div>
             <div class="user-input-field">
-              Website:
-              <select id="website">
-                <option value="glance">glance.net</option>
-                <option value="beta">beta.glance.net</option>
-                <option value="myglance">myglance.net</option>
-                <option value="dw1">dw1.myglance.org</option>
-                <option value="dw2">dw2.myglance.org</option>
-                <option value="dw3">dw3.myglance.org</option>
-                <option value="dw4">dw4.myglance.org</option>
-              </select>
+              <label for="website">Website:</label>
+              <input
+                list="website-options"
+                name="www.glance.net"
+                id="website"
+                value="www.glance.net"
+              />
+              <datalist id="website-options">
+                <option value="www.glance.net"></option>
+                <option value="beta.glance.net"></option>
+                <option value="www.myglance.net"></option>
+                <option value="dw1.myglance.org"></option>
+                <option value="dw2.myglance.org"></option>
+                <option value="dw3.myglance.org"></option>
+                <option value="dw4.myglance.org"></option>
+              </datalist>
+            </div>
+            <div class="user-input-field">
+              CDN:
+              <input
+                type="text"
+                id="cdn"
+                name="cdn"
+                value="www.glancecdn.net"
+              />
+            </div>
             </div>
             <div class="user-input-field">
               Video at session start:
@@ -179,6 +209,7 @@
           <p>Presence: <span id="presence-user-setting"></span></p>
           <p>Data-Site: <span id="environment-chosen"></span></p>
           <p>Website: <span id="using-website">glance.net</span></p>
+          <p>CDN: <span id="using-cdn">glance.net</span></p>
           <p>Video at session start: <span id="video-setting"></span></p>
           <p>Session Metrics: <span id="session-metrics-settings"></span></p>
           <div class="user-input-field">
