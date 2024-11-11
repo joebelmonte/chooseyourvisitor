@@ -44,11 +44,7 @@
           target="_blank"
           >About</a
         >
-        <a
-        href="#"
-        id="reset"
-        >Reset</a
-      >
+        <a href="#" id="reset">Reset</a>
         <span id="cb-version"></span>
       </div>
       <nav>
@@ -87,121 +83,115 @@
         >Demonstration of a simple page layout using HTML5 tags: header, nav,
         section, main, article, aside, footer, address.</strong
       ><br /><br />
-      <div class="user-input-feedback">
-        <div id="user-input">
-          <form>
-            <div class="user-input-field">
-              <p>Visitor ID:</p>
-              <input
-                type="text"
-                id="visitorId"
-                name="visitorId"
-                value="example"
-              />
-            </div>
-            <div class="user-input-field">
-              <p>Group ID:</p>
-              <input type="text" id="groupId" name="groupId" value="20541" />
-            </div>
-            <div class="user-input-field">
-              <p>Additional Group IDs (comma delimited):</p>
-              <input
-                type="text"
-                id="additionalGroupIds"
-                name="additionalGroupIds"
-                value=""
-                placeholder="optional"
-              />
-            </div>
-            <div class="user-input-field">
-              Presence:
-              <select id="presence-setting">
-                <option value="on">On</option>
-                <option value="api">API</option>
-                <option value="off">Off</option>
-              </select>
-            </div>
-            <div class="user-input-field">
-              Data-Site:
-              <select id="environment">
-                <option value="staging">staging</option>
-                <option value="production">production</option>
-              </select>
-            </div>
-            <div class="user-input-field">
-              <label for="website">Website:</label>
-              <input
-                list="website-options"
-                name="www.glance.net"
-                id="website"
-                value="www.glance.net"
-              />
-              <datalist id="website-options">
-                <option value="www.glance.net"></option>
-                <option value="beta.glance.net"></option>
-                <option value="www.myglance.net"></option>
-                <option value="dw1.myglance.org"></option>
-                <option value="dw2.myglance.org"></option>
-                <option value="dw3.myglance.org"></option>
-                <option value="dw4.myglance.org"></option>
-              </datalist>
-            </div>
-            <div class="user-input-field">
-              CDN:
-              <input
-                type="text"
-                id="cdn"
-                name="cdn"
-                value="www.glancecdn.net"
-              />
-            </div>
-            </div>
-            <div class="user-input-field">
-              Video at session start:
-              <select id="video-at-start">
-                <option value="default">Group Default</option>
-                <option value="off">Off</option>
-                <option value="large">Large</option>
-                <option value="small">Small</option>
-              </select>
-            </div>
-            <div class="user-input-field">
-              <input
-                type="checkbox"
-                id="session-metrics"
-                name="session-metrics"
-                value="session-metrics"
-              />
-              <label for="session-metrics">Collect session metrics?</label>
-            </div>
-            <div class="user-input-field">
-              <input
-                type="checkbox"
-                id="auto-load"
-                name="auto-load"
-                value="auto-load"
-              />
-              <label for="auto-load">Auto load script?</label>
-            </div>
-            <div class="user-input-field">
-              <label for="self-hosted">Self hosted script version:</label>
-              <input
-                list="self-hosted-versions"
-                name="self-hosted"
-                id="self-hosted"
-              />
-              <datalist id="self-hosted-versions">
-                <option value="5.7.9"></option>
-                <option value="5.8.2"></option>
-                <option value="6.1.1"></option>
-                <option value="6.3.0"></option>
-                <option value="6.3.1"></option>
-              </datalist>
-            </div>
-            <input type="button" value="Submit" id="visitor-id-button" />
-          </form>
-        </div>
-        <div id="user-feedback">
+      <div id="user-input">
+        <form>
+          <div class="user-input-field">
+            <p>Visitor ID:</p>
+            <input
+              type="text"
+              id="visitorId"
+              name="visitorId"
+              value="example"
+            />
+          </div>
+          <div class="user-input-field">
+            <p>Group ID:</p>
+            <input type="text" id="groupId" name="groupId" value="20541" />
+          </div>
+          <div class="user-input-field">
+            <p>Additional Group IDs (comma delimited):</p>
+            <input
+              type="text"
+              id="additionalGroupIds"
+              name="additionalGroupIds"
+              value=""
+              placeholder="optional"
+            />
+          </div>
+          <div class="user-input-field">
+            Presence:
+            <select id="presence-setting">
+              <option value="on">On</option>
+              <option value="api">API</option>
+              <option value="off">Off</option>
+            </select>
+          </div>
+          <div class="user-input-field">
+            Data-Site:
+            <select id="environment">
+              <option value="staging">staging</option>
+              <option value="production">production</option>
+            </select>
+          </div>
+          <div class="user-input-field">
+            <label for="website">Website:</label>
+            <input
+              list="website-options"
+              name="www.glance.net"
+              id="website"
+              value="www.glance.net"
+            />
+            <datalist id="website-options">
+              <option value="www.glance.net"></option>
+              <option value="beta.glance.net"></option>
+              <option value="www.myglance.net"></option>
+              <option value="dw1.myglance.org"></option>
+              <option value="dw2.myglance.org"></option>
+              <option value="dw3.myglance.org"></option>
+              <option value="dw4.myglance.org"></option>
+            </datalist>
+          </div>
+          <div class="user-input-field">
+            CDN:
+            <input type="text" id="cdn" name="cdn" value="www.glancecdn.net" />
+          </div>
+          <div class="user-input-field">
+            Video at session start:
+            <select id="video-at-start">
+              <option value="default">Group Default</option>
+              <option value="off">Off</option>
+              <option value="large">Large</option>
+              <option value="small">Small</option>
+            </select>
+          </div>
+          <div class="user-input-field">
+            <input
+              type="checkbox"
+              id="session-metrics"
+              name="session-metrics"
+              value="session-metrics"
+            />
+            <label for="session-metrics">Collect session metrics?</label>
+          </div>
+          <div class="user-input-field">
+            <input
+              type="checkbox"
+              id="auto-load"
+              name="auto-load"
+              value="auto-load"
+            />
+            <label for="auto-load">Auto load script?</label>
+          </div>
+          <div class="user-input-field">
+            <label for="self-hosted">Self hosted script version:</label>
+            <input
+              list="self-hosted-versions"
+              name="self-hosted"
+              id="self-hosted"
+            />
+            <datalist id="self-hosted-versions">
+              <option value="5.7.9"></option>
+              <option value="5.8.2"></option>
+              <option value="6.1.1"></option>
+              <option value="6.3.0"></option>
+              <option value="6.3.1"></option>
+            </datalist>
+          </div>
+          <input type="button" value="Submit" id="visitor-id-button" />
+        </form>
+      </div>
+      <div id="user-feedback">
+        <div class="user-input-feedback">
           <p>
             Visitor ID: <span id="visitor-id"></span>
             <button type="button" id="change-visitor-id">
