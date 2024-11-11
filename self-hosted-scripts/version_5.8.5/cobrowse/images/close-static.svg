@@ -1,0 +1,160 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 52 52">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-rule: evenodd;
+      }
+
+      .cls-3 {
+        fill-rule: evenodd;
+      }
+
+      .cls-4 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-5 {
+        clip-path: url(#clip-path-2);
+      }
+
+      .cls-6 {
+        clip-path: url(#clip-path-3);
+      }
+
+      .cls-7 {
+        clip-path: url(#clip-path-4);
+      }
+
+      .cls-8 {
+        clip-path: url(#clip-path-5);
+      }
+
+      .cls-9 {
+        clip-path: url(#clip-path-6);
+      }
+
+      .cls-10 {
+        clip-path: url(#clip-path-7);
+      }
+
+      .cls-11 {
+        clip-path: url(#clip-path-8);
+      }
+
+      .cls-12 {
+        clip-path: url(#clip-path-9);
+      }
+
+      .cls-13 {
+        clip-path: url(#clip-path-10);
+      }
+
+      .cls-14 {
+        clip-path: url(#clip-path-11);
+      }
+
+      .cls-15 {
+        fill: #fff;
+      }
+
+      .cls-16 {
+        clip-path: url(#clip-path-12);
+      }
+
+      .cls-17 {
+        clip-path: url(#clip-path-13);
+      }
+
+      .cls-18 {
+        clip-path: url(#clip-path-14);
+      }
+
+      .cls-19 {
+        clip-path: url(#clip-path-15);
+      }
+
+      .cls-20 {
+        clip-path: url(#clip-path-16);
+      }
+
+      .cls-21 {
+        clip-path: url(#clip-path-17);
+      }
+
+      .cls-22 {
+        clip-path: url(#clip-path-24);
+      }
+
+      .cls-23 {
+        clip-path: url(#clip-path-25);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" x="110.05" y="17.2" width="40" height="35"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect class="cls-1" x="110.05" y="157.2" width="40" height="35"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <polygon class="cls-2" points="130.66 175.86 135.94 181.14 137 180.08 131.72 174.81 137 169.53 135.94 168.47 130.66 173.75 125.39 168.47 124.33 169.53 129.61 174.81 124.33 180.08 125.39 181.14 130.66 175.86"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <rect class="cls-1" x="150.05" y="157.2" width="40" height="35"/>
+    </clipPath>
+    <clipPath id="clip-path-5">
+      <polygon class="cls-2" points="170.66 175.86 175.94 181.14 177 180.08 171.72 174.81 177 169.53 175.94 168.47 170.66 173.75 165.38 168.47 164.33 169.53 169.61 174.81 164.33 180.08 165.38 181.14 170.66 175.86"/>
+    </clipPath>
+    <clipPath id="clip-path-6">
+      <rect class="cls-1" x="150.05" y="52.2" width="40" height="35"/>
+    </clipPath>
+    <clipPath id="clip-path-7">
+      <polygon class="cls-2" points="170.66 70.86 175.94 76.14 177 75.08 171.72 69.81 177 64.53 175.94 63.47 170.66 68.75 165.38 63.47 164.33 64.53 169.61 69.81 164.33 75.08 165.38 76.14 170.66 70.86"/>
+    </clipPath>
+    <clipPath id="clip-path-8">
+      <rect class="cls-1" x="-58.98" y="65.89" width="52" height="52"/>
+    </clipPath>
+    <clipPath id="clip-path-9">
+      <polygon class="cls-2" points="-32.98 93.25 -26.17 100.07 -24.8 98.71 -31.62 91.89 -24.8 85.08 -26.17 83.72 -32.98 90.53 -39.79 83.72 -41.16 85.08 -34.34 91.89 -41.16 98.71 -39.79 100.07 -32.98 93.25"/>
+    </clipPath>
+    <clipPath id="clip-path-10">
+      <polygon class="cls-2" points="26 27.36 32.81 34.18 34.18 32.81 27.36 26 34.18 19.19 32.81 17.82 26 24.64 19.19 17.82 17.82 19.19 24.64 26 17.82 32.81 19.19 34.18 26 27.36"/>
+    </clipPath>
+    <clipPath id="clip-path-11">
+      <rect class="cls-1" x="-138.74" y="-226.53" width="941.13" height="1101.22"/>
+    </clipPath>
+    <clipPath id="clip-path-12">
+      <rect class="cls-1" x="150.05" y="87.2" width="40" height="35"/>
+    </clipPath>
+    <clipPath id="clip-path-13">
+      <polygon class="cls-2" points="170.66 105.86 175.94 111.14 177 110.08 171.72 104.81 177 99.53 175.94 98.47 170.66 103.75 165.38 98.47 164.33 99.53 169.61 104.81 164.33 110.08 165.38 111.14 170.66 105.86"/>
+    </clipPath>
+    <clipPath id="clip-path-14">
+      <rect class="cls-1" x="110.05" y="122.2" width="40" height="35"/>
+    </clipPath>
+    <clipPath id="clip-path-15">
+      <polygon class="cls-2" points="130.66 140.86 135.94 146.14 137 145.08 131.72 139.81 137 134.53 135.94 133.47 130.66 138.75 125.39 133.47 124.33 134.53 129.61 139.81 124.33 145.08 125.39 146.14 130.66 140.86"/>
+    </clipPath>
+    <clipPath id="clip-path-16">
+      <rect class="cls-1" x="150.05" y="122.2" width="40" height="35"/>
+    </clipPath>
+    <clipPath id="clip-path-17">
+      <polygon class="cls-2" points="170.66 140.86 175.94 146.14 177 145.08 171.72 139.81 177 134.53 175.94 133.47 170.66 138.75 165.38 133.47 164.33 134.53 169.61 139.81 164.33 145.08 165.38 146.14 170.66 140.86"/>
+    </clipPath>
+    <clipPath id="clip-path-24">
+      <rect class="cls-1" x="110.05" y="52.2" width="40" height="35"/>
+    </clipPath>
+    <clipPath id="clip-path-25">
+      <polygon class="cls-2" points="130.66 70.86 135.94 76.14 137 75.08 131.72 69.81 137 64.53 135.94 63.47 130.66 68.75 125.39 63.47 124.33 64.53 129.61 69.81 124.33 75.08 125.39 76.14 130.66 70.86"/>
+    </clipPath>
+  </defs>
+  <title>close</title>
+  <g class="cls-13">
+    <g class="cls-14">
+      <rect class="cls-15" x="8.95" y="8.95" width="34.11" height="34.11" transform="translate(-10.77 26) rotate(-45)"/>
+    </g>
+  </g>
+</svg>

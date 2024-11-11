@@ -1,0 +1,106 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 45 45">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill: none;
+      }
+
+      .cls-10, .cls-14, .cls-2 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3, .cls-4, .cls-6 {
+        clip-rule: evenodd;
+      }
+
+      .cls-14, .cls-16, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        fill: #ff6178;
+      }
+
+      .cls-7 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-8 {
+        clip-path: url(#clip-path-2);
+      }
+
+      .cls-9 {
+        clip-path: url(#clip-path-3);
+      }
+
+      .cls-11 {
+        clip-path: url(#clip-path-4);
+      }
+
+      .cls-12 {
+        clip-path: url(#clip-path-5);
+      }
+
+      .cls-13 {
+        clip-path: url(#clip-path-8);
+      }
+
+      .cls-15 {
+        clip-path: url(#clip-path-9);
+      }
+
+      .cls-17 {
+        clip-path: url(#clip-path-10);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" x="-236.63" y="208.13" width="52" height="52"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <polygon class="cls-3" points="-210.63 235.49 -203.81 242.3 -202.45 240.94 -209.26 234.13 -202.45 227.31 -203.81 225.95 -210.63 232.76 -217.44 225.95 -218.8 227.31 -211.99 234.13 -218.8 240.94 -217.44 242.3 -210.63 235.49"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <rect class="cls-5" x="-156.63" y="208.13" width="52" height="52"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <polygon class="cls-6" points="-130.63 235.49 -123.81 242.3 -122.45 240.94 -129.26 234.13 -122.45 227.31 -123.81 225.95 -130.63 232.76 -137.44 225.95 -138.8 227.31 -131.99 234.13 -138.8 240.94 -137.44 242.3 -130.63 235.49"/>
+    </clipPath>
+    <clipPath id="clip-path-5">
+      <polygon class="cls-3" points="-151.65 169.59 -144.83 176.41 -143.47 175.05 -150.28 168.23 -143.47 161.42 -144.83 160.06 -151.65 166.87 -158.46 160.06 -159.82 161.42 -153.01 168.23 -159.82 175.05 -158.46 176.41 -151.65 169.59"/>
+    </clipPath>
+    <clipPath id="clip-path-8">
+      <polygon class="cls-3" points="-130.75 235.53 -123.94 242.34 -122.57 240.98 -129.39 234.17 -122.57 227.35 -123.94 225.99 -130.75 232.8 -137.56 225.99 -138.93 227.35 -132.11 234.17 -138.93 240.98 -137.56 242.34 -130.75 235.53"/>
+    </clipPath>
+    <clipPath id="clip-path-9">
+      <polygon class="cls-4" points="-38.06 23.34 -38.06 32.97 -36.13 32.97 -36.13 23.34 -26.5 23.34 -26.5 21.41 -36.13 21.41 -36.13 11.78 -38.06 11.78 -38.06 21.41 -47.69 21.41 -47.69 23.34 -38.06 23.34"/>
+    </clipPath>
+    <clipPath id="clip-path-10">
+      <polygon class="cls-4" points="23.46 23.46 33.1 23.46 33.1 21.54 23.46 21.54 21.54 21.54 11.9 21.54 11.9 23.46 21.54 23.46 23.46 23.46"/>
+    </clipPath>
+  </defs>
+  <title>Untitled-1</title>
+  <g>
+    <rect class="cls-5" x="-156.63" y="208.13" width="52" height="52"/>
+    <g class="cls-9">
+      <rect class="cls-5" x="-295.72" y="-56.33" width="947.7" height="1267.31"/>
+    </g>
+  </g>
+  <g>
+    <polygon class="cls-10" points="-130.63 235.49 -123.81 242.3 -122.45 240.94 -129.26 234.13 -122.45 227.31 -123.81 225.95 -130.63 232.76 -137.44 225.95 -138.8 227.31 -131.99 234.13 -138.8 240.94 -137.44 242.3 -130.63 235.49"/>
+    <g class="cls-11">
+      <rect x="-295.37" y="-18.41" width="941.13" height="1101.22"/>
+    </g>
+  </g>
+  <g>
+    <polygon class="cls-14" points="-38.06 23.34 -38.06 32.97 -36.13 32.97 -36.13 23.34 -26.5 23.34 -26.5 21.41 -36.13 21.41 -36.13 11.78 -38.06 11.78 -38.06 21.41 -47.69 21.41 -47.69 23.34 -38.06 23.34"/>
+    <g class="cls-15">
+      <rect class="cls-16" x="-582.22" y="-21.17" width="1101.22" height="941.13" transform="translate(-327.03 109.27) rotate(-45)"/>
+    </g>
+  </g>
+  <g>
+    <polygon class="cls-14" points="23.46 23.46 33.1 23.46 33.1 21.54 23.46 21.54 21.54 21.54 11.9 21.54 11.9 23.46 21.54 23.46 23.46 23.46"/>
+    <g class="cls-17">
+      <rect class="cls-16" x="-522.63" y="-21.05" width="1101.22" height="941.13" transform="translate(-309.66 151.44) rotate(-45)"/>
+    </g>
+  </g>
+</svg>

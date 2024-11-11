@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google" content="notranslate">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta id="glance-pdf" data-url="">
+
+    <title>PDF.js viewer</title>
+
+    <link id="viewer-css" rel="stylesheet"><!-- href="//<%SCRIPTSERVER%>/styles/PDFViewer_<%VERSION3%>.css"-->
+    <base target="_blank" />
+
+</head>
+
+<body>
+    <div id="blurwrapper"> </div>
+
+    <div id="arialabels">
+        <div id="lbl_zoomin">Zoom In</div>
+        <div id="lbl_zoomout">Zoom Out</div>
+        <div id="lbl_zoom">Zoom To</div>
+        <div id="lbl_openfile">Open file</div>
+        <div id="lbl_close">Close</div>
+        <div id="lbl_previous">Previous</div>
+        <div id="lbl_next">Next</div>
+        <div id="lbl_pagenumber">Go to page</div>
+        <div id="lbl_find">Find in document</div>
+        <div id="find previous">Find previous</div>
+        <div id="find next">Find next</div>
+        <div id="stop seaching">Stop seaching</div>
+
+    </div>
+    <div class="pdf-controlpanel">
+
+        <div id="page-nav">
+            <div id="doctitle" class="doc-title"></div>
+            <div id="pagetitle"><!--Page:--></div>
+            <div>
+                <input id="pageselect" class="toolbarField pageNumber firstcontrol" value="1" size="4" min="1" max="3" type="number" tabindex="0" aria-labelledby="lbl_pagenumber">
+            </div>
+            <div>
+                <span class="pagetotal">of&nbsp;<span id="pagetotal"></span></span>
+            </div>
+        </div>
+
+        <div id="zoomcontrols">
+            <button id="zoomin" tabindex="0" aria-labelledby="lbl_zoomin"></button>
+            <button id="zoomout" tabindex="0" aria-labelledby="lbl_zoomout"></button>
+            <select id="zoomselect" class="styled-select" style="min-width: 105px; max-width: 125px;" title="Zoom" tabindex="0" aria-labelledby="lbl_zoom">
+                <option value="auto" selected="selected">Zoom To</option>
+                <option value="page-fit">Page Fit</option>
+                <option value="0.5">50%</option>
+                <option value="0.75">75%</option>
+                <option value="1">100%</option>
+                <option value="1.25">125%</option>
+                <option value="1.5">150%</option>
+                <option value="2">200%</option>
+                <option value="3">300%</option>
+                <option value="4">400%</option>
+            </select>
+        </div>
+        <div class="top-right">
+            <a id="pdf-find-button" title="find in document" tabindex="0" role="button" aria-labelledby="lbl_find"></a>
+            <a id="glance_dl" title="download file" tabindex="0" role="button" aria-labelledby="lbl_openfile" style="display:none"></a>
+            <a id="pdflink" target="_blank" title="Open file in your PDF viewer" tabindex="0" role="button" aria-labelledby="lbl_openfile"></a>
+            <a id="closedoc" title="Close" tabindex="0" role="button" aria-labelledby="lbl_close"></a>
+        </div>
+        <div id="find-controls" class="hidden">
+            <input id="pdf-find-input">
+            <span id="pdf-find-progress"><span id="pdf-find-index">0</span>/<span id="pdf-find-length">0</span></span>
+            <button id="pdf-find-previous" class="button-default" title="find previous" tabindex="0" role="button" aria-labelledby="lbl_find_previous">
+            </button>
+            <button id="pdf-find-next" class="button-default" title="find next" tabindex="0" role="button" aria-labelledby="lbl_find_next">
+            </button>
+            <button id="pdf-find-close" class="button-default" title="stop seaching" tabindex="0" role="button" aria-labelledby="lbl_stop_searching">
+            </button>
+        </div>
+    </div>
+
+    <div id="the-page">
+        <div id="message"></div>
+        <div id="the-svg"></div>
+        <canvas id="the-canvas"></canvas>
+        <div id="pdf-text-layer" class="textLayer"></div>
+        <div id="pdf-find-layer" class="findLayer"></div>
+        <div id="annotation-layer"></div>
+    </div>
+
+    <div id="container-floating-previous">
+        <div id="floating-button-previous" class="ripple" role="button" title="Previous Page" tabindex="0" aria-labelledby="lbl_previous"></div>
+    </div>
+    <div id="container-floating-next">
+        <div id="floating-button-next" class="ripple lastcontrol" role="button" title="Next Page" tabindex="0" aria-labelledby="lbl_next"></div>
+    </div>
+
+</body>
+
+</html>
+
