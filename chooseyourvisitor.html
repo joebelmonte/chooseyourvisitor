@@ -11,24 +11,6 @@
       name="description"
       content="Simple HTML5 Page layout template with header, footer, sidebar etc."
     />
-    <!-- <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self';
-      script-src 'self' https://cdn-bofa.myglance.net https://cdnstorage.myglance.net 'wasm-unsafe-eval';
-      connect-src https://www-bofa.myglance.net
-        https://bofa-staging-presence-1.myglance.net wss://bofa-staging-presence-1.myglance.net
-        https://cdn-bofa.myglance.net https://cdnstorage.myglance.net
-        https://cobrowse-bofa-location.myglance.net
-        https://bofa-staging-session-a-1.myglance.net wss://bofa-staging-session-a-1.myglance.net 
-        wss://visitor-cam-bofa.myglance.net
-        https://bofa-staging-video-a-1.myglance.net 
-        wss://bofa-staging-video-a-1.myglance.net;
-      style-src-elem 'self' https://cdn-bofa.myglance.net https://cdnstorage.myglance.net;
-      font-src 'self' https://cdnstorage.myglance.net;
-      img-src 'self' https://cdnstorage.myglance.net;
-      worker-src blob:;
-      frame-src https://www-bofa.myglance.net"
-    /> -->
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="chooseyourvisitor.js"></script>
     <script src="crossdomain.js"></script>
@@ -186,6 +168,8 @@
               <option value="6.1.1"></option>
               <option value="6.3.0"></option>
               <option value="6.3.1"></option>
+              <option value="6.33.0"></option>
+              <option value="direct-link-to-loader"></option>
             </datalist>
           </div>
           <input type="button" value="Submit" id="visitor-id-button" />
@@ -256,8 +240,8 @@
           </p>
         </article>
         <article>
-          <h2>His at autem inani volutpat</h2>
-          <p>
+          <h2>ID is "confidential"</h2>
+          <p id="confidential">
             Te has amet modo perfecto, te eum mucius conclusionemque, mel te
             erat deterruisset. Duo ceteros phaedrum id, ornatus postulant in
             sea. His at autem inani volutpat. Tollit possit in pri, platonem
@@ -353,9 +337,7 @@
       </main>
       <aside>
         <div>
-          <a id="pdf" href="/resources/Glance_User_Provisioning_API.pdf"
-            >PDF Anchor Tag</a
-          ><br />
+          <a id="pdf" href="./resources/sample.pdf">PDF Anchor Tag</a><br />
           <a id="pdf" href="/resources/OoPdfFormExample.pdf"
             >PDF with Form Fields Anchor Tag</a
           >
@@ -397,6 +379,13 @@
         </div>
       </aside>
     </section>
+    <iframe
+      src="https://joebelmonte.site"
+      width="400"
+      height="400"
+      sandbox="allow-scripts allow-same-origin"
+    >
+    </iframe>
     <footer>
       <p>
         &copy; You can copy, edit and publish this template but please leave a
