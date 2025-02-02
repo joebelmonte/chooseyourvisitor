@@ -8,6 +8,10 @@ Dev version deployed here: [Choose Your Visitor Dev](https://www.glancedev1.com/
 
 ## Release Notes
 
+### February 2, 2024
+
+- Added ability to specify a direct link to the loader file in the script tag
+
 ### November 5, 2024
 
 - Added support for arbitrary website and cdn values
