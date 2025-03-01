@@ -1,0 +1,1 @@
+// document.domain no longer set as of 6.8.0

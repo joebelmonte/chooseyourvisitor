@@ -390,3 +390,11 @@ input#allowed-roles {
 #user-feedback {
   display: none;
 }
+
+.fancy-border {
+  outline: solid red;
+}
+
+#change-visitor-id {
+  display: none;
+}

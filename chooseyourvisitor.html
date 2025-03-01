@@ -11,24 +11,6 @@
       name="description"
       content="Simple HTML5 Page layout template with header, footer, sidebar etc."
     />
-    <!-- <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self';
-      script-src 'self' https://cdn-bofa.myglance.net https://cdnstorage.myglance.net 'wasm-unsafe-eval';
-      connect-src https://www-bofa.myglance.net
-        https://bofa-staging-presence-1.myglance.net wss://bofa-staging-presence-1.myglance.net
-        https://cdn-bofa.myglance.net https://cdnstorage.myglance.net
-        https://cobrowse-bofa-location.myglance.net
-        https://bofa-staging-session-a-1.myglance.net wss://bofa-staging-session-a-1.myglance.net 
-        wss://visitor-cam-bofa.myglance.net
-        https://bofa-staging-video-a-1.myglance.net 
-        wss://bofa-staging-video-a-1.myglance.net;
-      style-src-elem 'self' https://cdn-bofa.myglance.net https://cdnstorage.myglance.net;
-      font-src 'self' https://cdnstorage.myglance.net;
-      img-src 'self' https://cdnstorage.myglance.net;
-      worker-src blob:;
-      frame-src https://www-bofa.myglance.net"
-    /> -->
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="chooseyourvisitor.js"></script>
     <script src="crossdomain.js"></script>
@@ -92,11 +74,23 @@
               id="visitorId"
               name="visitorId"
               value="example"
+              class="config"
+              data-config-name="visitorId"
             />
+            <button type="button" id="change-visitor-id">
+              Change Visitor ID
+            </button>
           </div>
           <div class="user-input-field">
             <p>Group ID:</p>
-            <input type="text" id="groupId" name="groupId" value="20541" />
+            <input
+              type="text"
+              id="groupId"
+              name="groupId"
+              value="20541"
+              class="config"
+              data-config-name="groupId"
+            />
           </div>
           <div class="user-input-field">
             <p>Additional Group IDs (comma delimited):</p>
@@ -106,11 +100,17 @@
               name="additionalGroupIds"
               value=""
               placeholder="optional"
+              class="config"
+              data-config-name="additionalGroupIds"
             />
           </div>
           <div class="user-input-field">
             Presence:
-            <select id="presence-setting">
+            <select
+              id="presenceSetting"
+              class="config"
+              data-config-name="presenceSetting"
+            >
               <option value="on">On</option>
               <option value="api">API</option>
               <option value="off">Off</option>
@@ -118,7 +118,11 @@
           </div>
           <div class="user-input-field">
             Data-Site:
-            <select id="environment">
+            <select
+              id="environment"
+              class="config"
+              data-config-name="environment"
+            >
               <option value="staging">staging</option>
               <option value="production">production</option>
             </select>
@@ -129,7 +133,9 @@
               list="website-options"
               name="www.glance.net"
               id="website"
-              value="www.glance.net"
+              placeholder="www.glance.net"
+              class="config"
+              data-config-name="website"
             />
             <datalist id="website-options">
               <option value="www.glance.net"></option>
@@ -143,11 +149,22 @@
           </div>
           <div class="user-input-field">
             CDN:
-            <input type="text" id="cdn" name="cdn" value="www.glancecdn.net" />
+            <input
+              type="text"
+              id="cdn"
+              name="cdn"
+              value="www.glancecdn.net"
+              class="config"
+              data-config-name="cdn"
+            />
           </div>
           <div class="user-input-field">
             Video at session start:
-            <select id="video-at-start">
+            <select
+              id="videoAtStart"
+              class="config"
+              data-config-name="videoAtStart"
+            >
               <option value="default">Group Default</option>
               <option value="off">Off</option>
               <option value="large">Large</option>
@@ -155,69 +172,60 @@
             </select>
           </div>
           <div class="user-input-field">
-            <input
-              type="checkbox"
-              id="session-metrics"
-              name="session-metrics"
-              value="session-metrics"
-            />
-            <label for="session-metrics">Collect session metrics?</label>
+            Collect session metrics?
+            <select
+              id="dataCollection"
+              class="config"
+              data-config-name="dataCollection"
+            >
+              <option value="off">off</option>
+              <option value="on">on</option>
+            </select>
           </div>
           <div class="user-input-field">
-            <input
-              type="checkbox"
-              id="auto-load"
-              name="auto-load"
-              value="auto-load"
-            />
-            <label for="auto-load">Auto load script?</label>
+            Auto load script?
+            <select
+              id="autoLoad"
+              class="config always-enabled"
+              data-config-name="autoLoad"
+            >
+              <option value="no">no</option>
+              <option value="yes">yes</option>
+            </select>
           </div>
           <div class="user-input-field">
-            <label for="self-hosted">Self hosted script version:</label>
+            Start paused?
+            <select
+              id="startPaused"
+              class="config always-enabled"
+              data-config-name="startPaused"
+            >
+              <option value="0">off</option>
+              <option value="1">on</option>
+            </select>
+          </div>
+          <div class="user-input-field">
+            <label for="selfHosted">Self hosted script version:</label>
             <input
               list="self-hosted-versions"
               name="self-hosted"
-              id="self-hosted"
+              id="selfHosted"
+              class="config"
+              data-config-name="selfHosted"
             />
             <datalist id="self-hosted-versions">
               <option value="5.7.9"></option>
               <option value="5.8.2"></option>
+              <option value="5.8.5"></option>
               <option value="6.1.1"></option>
               <option value="6.3.0"></option>
               <option value="6.3.1"></option>
+              <option value="6.33.0"></option>
+              <option value="direct-link-to-loader"></option>
             </datalist>
           </div>
-          <input type="button" value="Submit" id="visitor-id-button" />
+          <input type="button" value="Submit" id="submit-button" />
         </form>
-      </div>
-      <div id="user-feedback">
-        <div class="user-input-feedback">
-          <p>
-            Visitor ID: <span id="visitor-id"></span>
-            <button type="button" id="change-visitor-id">
-              Change Visitor ID
-            </button>
-          </p>
-          <p>Group ID: <span id="group-id"></span></p>
-          <p>Additional Group IDs: <span id="additional-group-ids"></span></p>
-          <p>Presence: <span id="presence-user-setting"></span></p>
-          <p>Data-Site: <span id="environment-chosen"></span></p>
-          <p>Website: <span id="using-website">glance.net</span></p>
-          <p>CDN: <span id="using-cdn">glance.net</span></p>
-          <p>Video at session start: <span id="video-setting"></span></p>
-          <p>Session Metrics: <span id="session-metrics-settings"></span></p>
-          <div class="user-input-field">
-            <input
-              type="checkbox"
-              id="auto-load-post-load"
-              name="auto-load-post-load"
-              value="auto-load-post-load"
-            />
-            <label for="auto-load-post-load">Auto load script?</label>
-          </div>
-          <div class="loader" id="loader"></div>
-          <p id="status-message">Waiting for agent</p>
-        </div>
       </div>
     </section>
     <section id="pageContent">
@@ -255,8 +263,8 @@
           </p>
         </article>
         <article>
-          <h2>His at autem inani volutpat</h2>
-          <p>
+          <h2>ID is "confidential"</h2>
+          <p id="confidential">
             Te has amet modo perfecto, te eum mucius conclusionemque, mel te
             erat deterruisset. Duo ceteros phaedrum id, ornatus postulant in
             sea. His at autem inani volutpat. Tollit possit in pri, platonem
@@ -352,9 +360,7 @@
       </main>
       <aside>
         <div>
-          <a id="pdf" href="/resources/Glance_User_Provisioning_API.pdf"
-            >PDF Anchor Tag</a
-          ><br />
+          <a id="pdf" href="./resources/sample.pdf">PDF Anchor Tag</a><br />
           <a id="pdf" href="/resources/OoPdfFormExample.pdf"
             >PDF with Form Fields Anchor Tag</a
           >
@@ -396,6 +402,13 @@
         </div>
       </aside>
     </section>
+    <!-- <iframe
+      src="https://joebelmonte.site"
+      width="400"
+      height="400"
+      sandbox="allow-scripts allow-same-origin"
+    >
+    </iframe> -->
     <footer>
       <p>
         &copy; You can copy, edit and publish this template but please leave a

@@ -6,7 +6,30 @@ Production deployed here: [Choose Your Visitor](https://www.glancedev1.com/joeb/
 
 Dev version deployed here: [Choose Your Visitor Dev](https://www.glancedev1.com/joeb/dev/cyv/chooseyourvisitor.html)
 
+## Documentation
+
+### Pointing Directly to the Loader Script
+
+- Select `direct-link-to-loader` from `Self hosted script version`
+- Put the url to the loader file in the `CDN` setting, e.g., `https://storage.glancecdn.net/cobrowse/js/GlanceCobrowseLoader_6.41.0M.js`
+
+### Adding a new configuration setting
+
+- The config should have the class `config`
+- If the element should be modifiable after the script is loaded, then also include the class `always-enabled`
+
 ## Release Notes
+
+### March 1, 2025
+
+- Significant refactoring of the underlying JavaScript
+- Parameters are now placed in the URL in a URL encoded string
+- Configuration area is simply disabled after the script tag is loaded, instead of hiding the configuration area and showing a completely different block of HTML
+- All of this was done with an eye towards being much easier to add new configurations in the future
+
+### February 2, 2025
+
+- Added ability to specify a direct link to the loader file in the script tag
 
 ### November 5, 2024
 
