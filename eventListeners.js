@@ -82,17 +82,19 @@ function rcevent(e) {
 
 function rc(e) {
   var status = e.enabled === true ? "started" : "ended";
-  console.log(`GLANCE SESSION LISTENER: Selective Editing has ${status}.`, e);
+  console.log(`GLANCE SESSION LISTENER: Restricted Editing has ${status}.`, e);
 }
 
 function rcrequested(callback) {
-  console.log("GLANCE SESSION LISTENER: Selective Editing has been requested.");
+  console.log(
+    "GLANCE SESSION LISTENER: Restricted Editing has been requested."
+  );
   callback.accept = function () {
-    console.log("Selective editing accepted.");
+    console.log("Restricted editing accepted.");
     GLANCE.Cobrowse.Visitor.enableRC(true);
   };
   callback.decline = function () {
-    console.log("Selective editing declined.");
+    console.log("Restricted editing declined.");
     GLANCE.Cobrowse.Visitor.enableRC(false);
   };
 }
