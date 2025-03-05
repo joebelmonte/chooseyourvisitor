@@ -20,6 +20,11 @@ Dev version deployed here: [Choose Your Visitor Dev](https://www.glancedev1.com/
 
 ## Release Notes
 
+### March 4, 2025
+
+- Added `omit` as an option for `Collect Session Metrics`
+- Fixed a bug that prevented sessions from starting on older cobrowse versions
+
 ### March 1, 2025
 
 - Significant refactoring of the underlying JavaScript
