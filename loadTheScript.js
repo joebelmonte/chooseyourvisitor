@@ -59,10 +59,12 @@ function addTheScript() {
       `${configurations.videoAtStart}`
     );
   }
-  theCobrowseScript.setAttribute(
-    "data-collection",
-    configurations.dataCollection
-  );
+  if (configurations.dataCollection != "omit") {
+    theCobrowseScript.setAttribute(
+      "data-collection",
+      configurations.dataCollection
+    );
+  }
   if (configurations.selfHosted != "") {
     var version = configurations.selfHosted;
     var src = `./self-hosted-scripts/version_${version}/cobrowse/js/GlanceCobrowseLoader_${version}M.js`;

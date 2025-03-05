@@ -6,8 +6,6 @@ function sessionstarting() {
 
 function sessionStarted() {
   console.log("GLANCE SESSION LISTENER: sessionstart has fired");
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("status-message").innerHTML = "";
   if (GLANCE.Cobrowse.Visitor.pauseSession) {
     // Putting this in an if statement to make it backwards compatible with older versions of CB
     // Sessions should never start in a paused state.
@@ -48,7 +46,6 @@ function sessionContinued() {
 
 function sessionEnded() {
   console.log("GLANCE SESSION LISTENER: sessionend has fired");
-  document.getElementById("loader").style.display = "block";
   console.log("the session has ended");
   document.getElementById("pause-session-button").disabled = true;
   document
