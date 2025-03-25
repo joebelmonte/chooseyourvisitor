@@ -51,9 +51,6 @@ function sessionEnded() {
   document
     .getElementById("pause-session-button")
     .setAttribute("title", "Only available during sessions running CB v 5.1+.");
-  const url = new URL(window.location);
-  url.searchParams.set("paused", "false");
-  window.history.pushState({}, "", url);
   document.getElementById("glance-cobrowse").dataset.startpaused = 2;
   document.querySelector("#pause-session-button").innerText = "Pause Session";
 }
