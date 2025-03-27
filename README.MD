@@ -20,6 +20,10 @@ Dev version deployed here: [Choose Your Visitor Dev](https://www.glancedev1.com/
 
 ## Release Notes
 
+### March 27, 2025
+
+- Fixed bug preventing settings loading from url on refresh after session was ended
+
 ### March 4, 2025
 
 - Added `omit` as an option for `Collect Session Metrics`

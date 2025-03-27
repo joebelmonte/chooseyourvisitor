@@ -6,16 +6,10 @@ function sessionstarting() {
 
 function sessionStarted() {
   console.log("GLANCE SESSION LISTENER: sessionstart has fired");
+  // Putting this in an if statement to make it backwards compatible with older versions of CB
   if (GLANCE.Cobrowse.Visitor.pauseSession) {
-    // Putting this in an if statement to make it backwards compatible with older versions of CB
-    // Sessions should never start in a paused state.
-    // However, I was noticing that if the previous session had started in a paused state,
-    // then starting another session w/o refreshing the page would start it as paused, even if
-    // The script tag attribute had been switched to 2
     document.getElementById("pause-session-button").disabled = false;
     document.getElementById("pause-session-button").setAttribute("title", "");
-    document.querySelector("#pause-session-button").innerText = "Pause Session";
-    GLANCE.Cobrowse.Visitor.pauseSession({ pause: false });
   }
   // Automatically copy the session key to the clipboard
   var sessionKey = GLANCE.Cobrowse.Visitor.getKey();
